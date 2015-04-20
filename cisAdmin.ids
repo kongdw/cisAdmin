@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - s2jh@localhost" uuid="5bf9336a-e64a-47a5-b600-3457545fe8d8">
+    <database-info product="MySQL" version="5.6.14" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="s2jh"/>
+    <table name="ACT_EVT_LOG" schema="" catalog="s2jh" type="TABLE">
+      <column name="LOG_NR_" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TIME_STAMP_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVAoMyk=" version="true"/>
+      <column name="USER_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DATA_" sqlType="LONGBLOB" precision="2147483647" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="LOCK_OWNER_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="LOCK_TIME_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="IS_PROCESSED_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="LOG_NR_"/>
+    </table>
+    <table name="ACT_GE_BYTEARRAY" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DEPLOYMENT_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="BYTES_" sqlType="LONGBLOB" precision="2147483647" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="GENERATED_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <foreign-key name="ACT_FK_BYTEARR_DEPL" columns="DEPLOYMENT_ID_" ref-table="ACT_RE_DEPLOYMENT" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="ACT_FK_MODEL_SOURCE" table="ACT_RE_MODEL" schema="" catalog="s2jh" columns="EDITOR_SOURCE_VALUE_ID_"/>
+      <exported-key name="ACT_FK_MODEL_SOURCE_EXTRA" table="ACT_RE_MODEL" schema="" catalog="s2jh" columns="EDITOR_SOURCE_EXTRA_VALUE_ID_"/>
+      <exported-key name="ACT_FK_JOB_EXCEPTION" table="ACT_RU_JOB" schema="" catalog="s2jh" columns="EXCEPTION_STACK_ID_"/>
+      <exported-key name="ACT_FK_VAR_BYTEARRAY" table="ACT_RU_VARIABLE" schema="" catalog="s2jh" columns="BYTEARRAY_ID_"/>
+      <index name="ACT_FK_BYTEARR_DEPL" unique="false" columns="DEPLOYMENT_ID_"/>
+    </table>
+    <table name="ACT_GE_PROPERTY" schema="" catalog="s2jh" type="TABLE">
+      <column name="NAME_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="VALUE_" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="NAME_"/>
+    </table>
+    <table name="ACT_HI_ACTINST" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ACT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CALL_PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ACT_NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ACT_TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ASSIGNEE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="START_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="END_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="DURATION_" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <index name="ACT_IDX_HI_ACT_INST_END" unique="false" columns="END_TIME_"/>
+      <index name="ACT_IDX_HI_ACT_INST_EXEC" unique="false" columns="EXECUTION_ID_,ACT_ID_"/>
+      <index name="ACT_IDX_HI_ACT_INST_PROCINST" unique="false" columns="PROC_INST_ID_,ACT_ID_"/>
+      <index name="ACT_IDX_HI_ACT_INST_START" unique="false" columns="START_TIME_"/>
+    </table>
+    <table name="ACT_HI_ATTACHMENT" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="USER_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DESCRIPTION_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="URL_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CONTENT_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+    </table>
+    <table name="ACT_HI_COMMENT" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="USER_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ACTION_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="MESSAGE_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FULL_MSG_" sqlType="LONGBLOB" precision="2147483647" scale="0" nullable="true" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+    </table>
+    <table name="ACT_HI_DETAIL" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ACT_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VAR_TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="BYTEARRAY_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DOUBLE_" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="LONG_" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TEXT_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TEXT2_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <index name="ACT_IDX_HI_DETAIL_ACT_INST" unique="false" columns="ACT_INST_ID_"/>
+      <index name="ACT_IDX_HI_DETAIL_NAME" unique="false" columns="NAME_"/>
+      <index name="ACT_IDX_HI_DETAIL_PROC_INST" unique="false" columns="PROC_INST_ID_"/>
+      <index name="ACT_IDX_HI_DETAIL_TASK_ID" unique="false" columns="TASK_ID_"/>
+      <index name="ACT_IDX_HI_DETAIL_TIME" unique="false" columns="TIME_"/>
+    </table>
+    <table name="ACT_HI_IDENTITYLINK" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="GROUP_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="USER_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <index name="ACT_IDX_HI_IDENT_LNK_PROCINST" unique="false" columns="PROC_INST_ID_"/>
+      <index name="ACT_IDX_HI_IDENT_LNK_TASK" unique="false" columns="TASK_ID_"/>
+      <index name="ACT_IDX_HI_IDENT_LNK_USER" unique="false" columns="USER_ID_"/>
+    </table>
+    <table name="ACT_HI_PROCINST" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="BUSINESS_KEY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="START_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="END_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="DURATION_" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="START_USER_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="START_ACT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="END_ACT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SUPER_PROCESS_INSTANCE_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DELETE_REASON_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <index name="PROC_INST_ID_" unique="true" columns="PROC_INST_ID_"/>
+      <index name="ACT_IDX_HI_PRO_I_BUSKEY" unique="false" columns="BUSINESS_KEY_"/>
+      <index name="ACT_IDX_HI_PRO_INST_END" unique="false" columns="END_TIME_"/>
+    </table>
+    <table name="ACT_HI_TASKINST" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_DEF_KEY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PARENT_TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DESCRIPTION_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="OWNER_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ASSIGNEE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="START_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="CLAIM_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="END_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="DURATION_" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="DELETE_REASON_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PRIORITY_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="DUE_DATE_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="FORM_KEY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CATEGORY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+    </table>
+    <table name="ACT_HI_VARINST" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VAR_TYPE_" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="BYTEARRAY_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DOUBLE_" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="LONG_" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TEXT_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TEXT2_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CREATE_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="LAST_UPDATED_TIME_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <index name="ACT_IDX_HI_PROCVAR_NAME_TYPE" unique="false" columns="NAME_,VAR_TYPE_"/>
+      <index name="ACT_IDX_HI_PROCVAR_PROC_INST" unique="false" columns="PROC_INST_ID_"/>
+      <index name="ACT_IDX_HI_PROCVAR_TASK_ID" unique="false" columns="TASK_ID_"/>
+    </table>
+    <table name="ACT_RE_DEPLOYMENT" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CATEGORY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="DEPLOY_TIME_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVAoMyk=" version="true"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <exported-key name="ACT_FK_BYTEARR_DEPL" table="ACT_GE_BYTEARRAY" schema="" catalog="s2jh" columns="DEPLOYMENT_ID_"/>
+      <exported-key name="ACT_FK_MODEL_DEPLOYMENT" table="ACT_RE_MODEL" schema="" catalog="s2jh" columns="DEPLOYMENT_ID_"/>
+    </table>
+    <table name="ACT_RE_MODEL" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="KEY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CATEGORY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CREATE_TIME_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="LAST_UPDATE_TIME_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="VERSION_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="META_INFO_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DEPLOYMENT_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EDITOR_SOURCE_VALUE_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EDITOR_SOURCE_EXTRA_VALUE_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <foreign-key name="ACT_FK_MODEL_DEPLOYMENT" columns="DEPLOYMENT_ID_" ref-table="ACT_RE_DEPLOYMENT" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_MODEL_SOURCE" columns="EDITOR_SOURCE_VALUE_ID_" ref-table="ACT_GE_BYTEARRAY" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_MODEL_SOURCE_EXTRA" columns="EDITOR_SOURCE_EXTRA_VALUE_ID_" ref-table="ACT_GE_BYTEARRAY" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="ACT_FK_MODEL_DEPLOYMENT" unique="false" columns="DEPLOYMENT_ID_"/>
+      <index name="ACT_FK_MODEL_SOURCE" unique="false" columns="EDITOR_SOURCE_VALUE_ID_"/>
+      <index name="ACT_FK_MODEL_SOURCE_EXTRA" unique="false" columns="EDITOR_SOURCE_EXTRA_VALUE_ID_"/>
+    </table>
+    <table name="ACT_RE_PROCDEF" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CATEGORY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="KEY_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VERSION_" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="DEPLOYMENT_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="RESOURCE_NAME_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DGRM_RESOURCE_NAME_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DESCRIPTION_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HAS_START_FORM_KEY_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="HAS_GRAPHICAL_NOTATION_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="SUSPENSION_STATE_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <exported-key name="ACT_FK_EXE_PROCDEF" table="ACT_RU_EXECUTION" schema="" catalog="s2jh" columns="PROC_DEF_ID_"/>
+      <exported-key name="ACT_FK_ATHRZ_PROCEDEF" table="ACT_RU_IDENTITYLINK" schema="" catalog="s2jh" columns="PROC_DEF_ID_"/>
+      <exported-key name="ACT_FK_TASK_PROCDEF" table="ACT_RU_TASK" schema="" catalog="s2jh" columns="PROC_DEF_ID_"/>
+      <index name="ACT_UNIQ_PROCDEF" unique="true" columns="KEY_,VERSION_,TENANT_ID_"/>
+    </table>
+    <table name="ACT_RU_EVENT_SUBSCR" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="EVENT_TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EVENT_NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ACTIVITY_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CONFIGURATION_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CREATED_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVAoMyk="/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <foreign-key name="ACT_FK_EVENT_EXEC" columns="EXECUTION_ID_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="ACT_FK_EVENT_EXEC" unique="false" columns="EXECUTION_ID_"/>
+      <index name="ACT_IDX_EVENT_SUBSCR_CONFIG_" unique="false" columns="CONFIGURATION_"/>
+    </table>
+    <table name="ACT_RU_EXECUTION" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="BUSINESS_KEY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PARENT_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SUPER_EXEC_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ACT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="IS_ACTIVE_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="IS_CONCURRENT_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="IS_SCOPE_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="IS_EVENT_SCOPE_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="SUSPENSION_STATE_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CACHED_ENT_STATE_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="LOCK_TIME_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <foreign-key name="ACT_FK_EXE_PROCDEF" columns="PROC_DEF_ID_" ref-table="ACT_RE_PROCDEF" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_EXE_PARENT" columns="PARENT_ID_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_EXE_PROCINST" columns="PROC_INST_ID_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="ACT_FK_EXE_SUPER" columns="SUPER_EXEC_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="ACT_FK_EVENT_EXEC" table="ACT_RU_EVENT_SUBSCR" schema="" catalog="s2jh" columns="EXECUTION_ID_"/>
+      <exported-key name="ACT_FK_EXE_PARENT" table="ACT_RU_EXECUTION" schema="" catalog="s2jh" columns="PARENT_ID_"/>
+      <exported-key name="ACT_FK_EXE_PROCINST" table="ACT_RU_EXECUTION" schema="" catalog="s2jh" columns="PROC_INST_ID_"/>
+      <exported-key name="ACT_FK_EXE_SUPER" table="ACT_RU_EXECUTION" schema="" catalog="s2jh" columns="SUPER_EXEC_"/>
+      <exported-key name="ACT_FK_IDL_PROCINST" table="ACT_RU_IDENTITYLINK" schema="" catalog="s2jh" columns="PROC_INST_ID_"/>
+      <exported-key name="ACT_FK_TASK_EXE" table="ACT_RU_TASK" schema="" catalog="s2jh" columns="EXECUTION_ID_"/>
+      <exported-key name="ACT_FK_TASK_PROCINST" table="ACT_RU_TASK" schema="" catalog="s2jh" columns="PROC_INST_ID_"/>
+      <exported-key name="ACT_FK_VAR_EXE" table="ACT_RU_VARIABLE" schema="" catalog="s2jh" columns="EXECUTION_ID_"/>
+      <exported-key name="ACT_FK_VAR_PROCINST" table="ACT_RU_VARIABLE" schema="" catalog="s2jh" columns="PROC_INST_ID_"/>
+      <index name="ACT_FK_EXE_PARENT" unique="false" columns="PARENT_ID_"/>
+      <index name="ACT_FK_EXE_PROCDEF" unique="false" columns="PROC_DEF_ID_"/>
+      <index name="ACT_FK_EXE_PROCINST" unique="false" columns="PROC_INST_ID_"/>
+      <index name="ACT_FK_EXE_SUPER" unique="false" columns="SUPER_EXEC_"/>
+      <index name="ACT_IDX_EXEC_BUSKEY" unique="false" columns="BUSINESS_KEY_"/>
+    </table>
+    <table name="ACT_RU_IDENTITYLINK" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="GROUP_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="USER_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <foreign-key name="ACT_FK_IDL_PROCINST" columns="PROC_INST_ID_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_ATHRZ_PROCEDEF" columns="PROC_DEF_ID_" ref-table="ACT_RE_PROCDEF" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_TSKASS_TASK" columns="TASK_ID_" ref-table="ACT_RU_TASK" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="ACT_FK_IDL_PROCINST" unique="false" columns="PROC_INST_ID_"/>
+      <index name="ACT_FK_TSKASS_TASK" unique="false" columns="TASK_ID_"/>
+      <index name="ACT_IDX_ATHRZ_PROCEDEF" unique="false" columns="PROC_DEF_ID_"/>
+      <index name="ACT_IDX_IDENT_LNK_GROUP" unique="false" columns="GROUP_ID_"/>
+      <index name="ACT_IDX_IDENT_LNK_USER" unique="false" columns="USER_ID_"/>
+    </table>
+    <table name="ACT_RU_JOB" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="LOCK_EXP_TIME_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="LOCK_OWNER_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EXCLUSIVE_" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROCESS_INSTANCE_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="RETRIES_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="EXCEPTION_STACK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EXCEPTION_MSG_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DUEDATE_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="REPEAT_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HANDLER_TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HANDLER_CFG_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <foreign-key name="ACT_FK_JOB_EXCEPTION" columns="EXCEPTION_STACK_ID_" ref-table="ACT_GE_BYTEARRAY" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="ACT_FK_JOB_EXCEPTION" unique="false" columns="EXCEPTION_STACK_ID_"/>
+    </table>
+    <table name="ACT_RU_TASK" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_DEF_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PARENT_TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DESCRIPTION_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_DEF_KEY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="OWNER_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ASSIGNEE_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DELEGATION_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PRIORITY_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CREATE_TIME_" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVAoMyk=" version="true"/>
+      <column name="DUE_DATE_" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="CATEGORY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SUSPENSION_STATE_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="TENANT_ID_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="FORM_KEY_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <foreign-key name="ACT_FK_TASK_PROCDEF" columns="PROC_DEF_ID_" ref-table="ACT_RE_PROCDEF" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_TASK_EXE" columns="EXECUTION_ID_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_TASK_PROCINST" columns="PROC_INST_ID_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="ACT_FK_TSKASS_TASK" table="ACT_RU_IDENTITYLINK" schema="" catalog="s2jh" columns="TASK_ID_"/>
+      <index name="ACT_FK_TASK_EXE" unique="false" columns="EXECUTION_ID_"/>
+      <index name="ACT_FK_TASK_PROCDEF" unique="false" columns="PROC_DEF_ID_"/>
+      <index name="ACT_FK_TASK_PROCINST" unique="false" columns="PROC_INST_ID_"/>
+      <index name="ACT_IDX_TASK_CREATE" unique="false" columns="CREATE_TIME_"/>
+    </table>
+    <table name="ACT_RU_VARIABLE" schema="" catalog="s2jh" type="TABLE">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="NAME_" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EXECUTION_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PROC_INST_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TASK_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="BYTEARRAY_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DOUBLE_" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="LONG_" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TEXT_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TEXT2_" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_"/>
+      <foreign-key name="ACT_FK_VAR_BYTEARRAY" columns="BYTEARRAY_ID_" ref-table="ACT_GE_BYTEARRAY" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_VAR_EXE" columns="EXECUTION_ID_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ACT_FK_VAR_PROCINST" columns="PROC_INST_ID_" ref-table="ACT_RU_EXECUTION" ref-schema="" ref-catalog="s2jh" ref-columns="ID_" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="ACT_FK_VAR_BYTEARRAY" unique="false" columns="BYTEARRAY_ID_"/>
+      <index name="ACT_FK_VAR_EXE" unique="false" columns="EXECUTION_ID_"/>
+      <index name="ACT_FK_VAR_PROCINST" unique="false" columns="PROC_INST_ID_"/>
+      <index name="ACT_IDX_VARIABLE_TASK_ID" unique="false" columns="TASK_ID_"/>
+    </table>
+    <table name="AUD_RevisionEntity" schema="" catalog="s2jh" type="TABLE">
+      <column name="rev" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="authDisplay" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="authGuid" sqlType="VARCHAR" precision="128" scale="0" nullable="true" jdbcType="12"/>
+      <column name="controllerClassName" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="controllerMethodName" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="revstmp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="rev"/>
+      <exported-key name="FK_l7sp5lph8b7s9itqk5mh0w87s" table="AUD_sys_ConfigProperty" schema="" catalog="s2jh" columns="REV"/>
+    </table>
+    <table name="AUD_sys_ConfigProperty" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="REV" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="REVTYPE" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="version_MOD" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="htmlValue" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="htmlValue_MOD" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="propDescn" sqlType="VARCHAR" precision="2000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="propDescn_MOD" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="propKey" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="propKey_MOD" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="propName" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="propName_MOD" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="simpleValue" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="simpleValue_MOD" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <primary-key name="PRIMARY" columns="id,REV"/>
+      <foreign-key name="FK_l7sp5lph8b7s9itqk5mh0w87s" columns="REV" ref-table="AUD_RevisionEntity" ref-schema="" ref-catalog="s2jh" ref-columns="rev" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_l7sp5lph8b7s9itqk5mh0w87s" unique="false" columns="REV"/>
+    </table>
+    <table name="QRTZ_BLOB_TRIGGERS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="BLOB_DATA" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <foreign-key name="qrtz_blob_triggers_ibfk_1" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP" ref-table="QRTZ_TRIGGERS" ref-schema="" ref-catalog="s2jh" ref-columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="QRTZ_CALENDARS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CALENDAR_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CALENDAR" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,CALENDAR_NAME"/>
+    </table>
+    <table name="QRTZ_CRON_TRIGGERS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CRON_EXPRESSION" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TIME_ZONE_ID" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <foreign-key name="qrtz_cron_triggers_ibfk_1" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP" ref-table="QRTZ_TRIGGERS" ref-schema="" ref-catalog="s2jh" ref-columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="QRTZ_FIRED_TRIGGERS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ENTRY_ID" sqlType="VARCHAR" precision="95" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="INSTANCE_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FIRED_TIME" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="SCHED_TIME" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="PRIORITY" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="STATE" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="JOB_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="JOB_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="IS_NONCONCURRENT" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="REQUESTS_RECOVERY" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,ENTRY_ID"/>
+    </table>
+    <table name="QRTZ_JOB_DETAILS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="JOB_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="JOB_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DESCRIPTION" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="JOB_CLASS_NAME" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="IS_DURABLE" sqlType="VARCHAR" precision="1" scale="0" nullable="false" jdbcType="12"/>
+      <column name="IS_NONCONCURRENT" sqlType="VARCHAR" precision="1" scale="0" nullable="false" jdbcType="12"/>
+      <column name="IS_UPDATE_DATA" sqlType="VARCHAR" precision="1" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REQUESTS_RECOVERY" sqlType="VARCHAR" precision="1" scale="0" nullable="false" jdbcType="12"/>
+      <column name="JOB_DATA" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,JOB_NAME,JOB_GROUP"/>
+      <exported-key name="qrtz_triggers_ibfk_1" table="QRTZ_TRIGGERS" schema="" catalog="s2jh" columns="SCHED_NAME,JOB_NAME,JOB_GROUP"/>
+    </table>
+    <table name="QRTZ_LOCKS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="LOCK_NAME" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,LOCK_NAME"/>
+    </table>
+    <table name="QRTZ_PAUSED_TRIGGER_GRPS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,TRIGGER_GROUP"/>
+    </table>
+    <table name="QRTZ_SCHEDULER_STATE" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="INSTANCE_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="LAST_CHECKIN_TIME" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="CHECKIN_INTERVAL" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,INSTANCE_NAME"/>
+    </table>
+    <table name="QRTZ_SIMPLE_TRIGGERS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REPEAT_COUNT" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="REPEAT_INTERVAL" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="TIMES_TRIGGERED" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <foreign-key name="qrtz_simple_triggers_ibfk_1" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP" ref-table="QRTZ_TRIGGERS" ref-schema="" ref-catalog="s2jh" ref-columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="QRTZ_SIMPROP_TRIGGERS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="STR_PROP_1" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="STR_PROP_2" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="STR_PROP_3" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="INT_PROP_1" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="INT_PROP_2" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="LONG_PROP_1" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="LONG_PROP_2" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="DEC_PROP_1" sqlType="DECIMAL" precision="13" scale="4" nullable="true" jdbcType="3"/>
+      <column name="DEC_PROP_2" sqlType="DECIMAL" precision="13" scale="4" nullable="true" jdbcType="3"/>
+      <column name="BOOL_PROP_1" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="BOOL_PROP_2" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <foreign-key name="qrtz_simprop_triggers_ibfk_1" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP" ref-table="QRTZ_TRIGGERS" ref-schema="" ref-catalog="s2jh" ref-columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="QRTZ_TRIGGERS" schema="" catalog="s2jh" type="TABLE">
+      <column name="SCHED_NAME" sqlType="VARCHAR" precision="120" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="JOB_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="JOB_GROUP" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DESCRIPTION" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NEXT_FIRE_TIME" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="PREV_FIRE_TIME" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="PRIORITY" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="TRIGGER_STATE" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TRIGGER_TYPE" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="START_TIME" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="END_TIME" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="CALENDAR_NAME" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="MISFIRE_INSTR" sqlType="SMALLINT" precision="5" scale="0" nullable="true" jdbcType="5"/>
+      <column name="JOB_DATA" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <foreign-key name="qrtz_triggers_ibfk_1" columns="SCHED_NAME,JOB_NAME,JOB_GROUP" ref-table="QRTZ_JOB_DETAILS" ref-schema="" ref-catalog="s2jh" ref-columns="SCHED_NAME,JOB_NAME,JOB_GROUP" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="qrtz_blob_triggers_ibfk_1" table="QRTZ_BLOB_TRIGGERS" schema="" catalog="s2jh" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <exported-key name="qrtz_cron_triggers_ibfk_1" table="QRTZ_CRON_TRIGGERS" schema="" catalog="s2jh" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <exported-key name="qrtz_simple_triggers_ibfk_1" table="QRTZ_SIMPLE_TRIGGERS" schema="" catalog="s2jh" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <exported-key name="qrtz_simprop_triggers_ibfk_1" table="QRTZ_SIMPROP_TRIGGERS" schema="" catalog="s2jh" columns="SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP"/>
+      <index name="SCHED_NAME" unique="false" columns="SCHED_NAME,JOB_NAME,JOB_GROUP"/>
+    </table>
+    <table name="act_id_group" schema="" catalog="s2jh" type="VIEW">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="NAME_" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TYPE_" sqlType="VARCHAR" precision="4" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+    </table>
+    <table name="act_id_membership" schema="" catalog="s2jh" type="VIEW">
+      <column name="USER_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="GROUP_ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+    </table>
+    <table name="act_id_user" schema="" catalog="s2jh" type="VIEW">
+      <column name="ID_" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REV_" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="FIRST_" sqlType="BINARY" precision="0" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="LAST_" sqlType="BINARY" precision="0" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="EMAIL_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PWD_" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PICTURE_ID_" sqlType="BINARY" precision="0" scale="0" nullable="true" jdbcType="-2"/>
+    </table>
+    <table name="auth_Department" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="code" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="parent_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="UK_dxl3gvgg60lbjm1k1x8b4tqbd" unique="true" columns="code"/>
+    </table>
+    <table name="auth_MgmtUser" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="department" sqlType="TINYBLOB" precision="255" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="user" sqlType="TINYBLOB" precision="255" scale="0" nullable="true" jdbcType="-2"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="auth_Privilege" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="code" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="disabled" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="rebuildTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_b63t67gbkecajwsywpcdrd66t" table="auth_RoleR2Privilege" schema="" catalog="s2jh" columns="privilege_id"/>
+      <index name="UK_r4q86odcfest66ygv72cmbyfo" unique="true" columns="code"/>
+    </table>
+    <table name="auth_Role" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="code" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="2000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="disabled" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="name" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_bfko43k9qymc9g10gxsw8peyd" table="auth_RoleR2Privilege" schema="" catalog="s2jh" columns="role_id"/>
+      <exported-key name="FK_5fk9ov44mbca6844h65smbk5v" table="auth_UserR2Role" schema="" catalog="s2jh" columns="role_id"/>
+      <index name="UK_l98pp6nrurgvn70fhg288yq9o" unique="true" columns="code"/>
+    </table>
+    <table name="auth_RoleR2Privilege" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="privilege_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="role_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_bfko43k9qymc9g10gxsw8peyd" columns="role_id" ref-table="auth_Role" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_b63t67gbkecajwsywpcdrd66t" columns="privilege_id" ref-table="auth_Privilege" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_b63t67gbkecajwsywpcdrd66t" unique="false" columns="privilege_id"/>
+      <index name="FK_bfko43k9qymc9g10gxsw8peyd" unique="false" columns="role_id"/>
+    </table>
+    <table name="auth_SignupUser" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="auditTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="authUid" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="contactInfo" sqlType="VARCHAR" precision="3000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="128" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nickName" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
+      <column name="remarkInfo" sqlType="VARCHAR" precision="3000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="signupTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="UK_kejmsmqoxj0dpb2n5394ycx89" unique="true" columns="authUid"/>
+    </table>
+    <table name="auth_User" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="accessToken" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="accessTokenExpireTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="accountExpireTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="accountNonLocked" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="authGuid" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="authType" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="authUid" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="credentialsExpireTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lastLogonFailureTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="lastLogonHost" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lastLogonIP" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lastLogonTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="logonFailureTimes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="logonTimes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="mgmtGranted" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="mobile" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nickName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="randomCode" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="signupTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="bindTo_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_oihaimecuy8wle5bcmfhf2rfy" table="auth_UserR2Role" schema="" catalog="s2jh" columns="user_id"/>
+      <exported-key name="FK_al3bkn1cklfkdw9fg5bjjs9ih" table="shop_SiteUser" schema="" catalog="s2jh" columns="user_id"/>
+      <exported-key name="FK_cgx7786vw273a731nx2r69iaj" table="sys_NotifyMessage" schema="" catalog="s2jh" columns="targetUser_id"/>
+      <exported-key name="FK_1mvnl9t4u9ba95uwhh0dh9otd" table="sys_NotifyMessageRead" schema="" catalog="s2jh" columns="readUser_id"/>
+      <index name="UK_3t39terwb8guss0y17hib8fnf" unique="true" columns="authUid,authType"/>
+      <index name="UK_jkobtq8muvg2ag9nn6s5kskmo" unique="true" columns="authGuid"/>
+    </table>
+    <table name="auth_UserLogonLog" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="authGuid" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="authType" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="authUid" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="httpSessionId" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
+      <column name="localAddr" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="localName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="localPort" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="logonTime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="logonTimeLength" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="logonTimes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="logoutTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="remoteAddr" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="remoteHost" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="remotePort" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="serverIP" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="userAgent" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="xforwardFor" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="UK_tp3pbrtjq2ia8sh32ef55gplj" unique="true" columns="httpSessionId"/>
+    </table>
+    <table name="auth_UserR2Role" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="role_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_oihaimecuy8wle5bcmfhf2rfy" columns="user_id" ref-table="auth_User" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_5fk9ov44mbca6844h65smbk5v" columns="role_id" ref-table="auth_Role" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="UK_9i3ylh0bm8y3ug9b222xbowiw" unique="true" columns="user_id,role_id"/>
+      <index name="FK_5fk9ov44mbca6844h65smbk5v" unique="false" columns="role_id"/>
+    </table>
+    <table name="logging_event" schema="" catalog="s2jh" type="TABLE">
+      <column name="event_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="arg0" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="arg1" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="arg2" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="arg3" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="callerClass" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="callerFilename" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="callerLine" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12"/>
+      <column name="callerMethod" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="createdBy" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="createdDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="formattedMessage" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lastModifiedBy" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lastModifiedDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="levelString" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="loggerName" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="operationExplain" sqlType="VARCHAR" precision="4000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="referenceFlag" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="state" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="threadName" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="timestmp" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="event_id"/>
+      <exported-key name="FK_hjmlc3lmhedtk9jw71kssif9o" table="logging_event_exception" schema="" catalog="s2jh" columns="event_id"/>
+      <exported-key name="FK_t41emp5ddc9lx9x6ir2gaj5rs" table="logging_event_property" schema="" catalog="s2jh" columns="event_id"/>
+    </table>
+    <table name="logging_event_exception" schema="" catalog="s2jh" type="TABLE">
+      <column name="event_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="i" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5"/>
+      <column name="trace_line" sqlType="VARCHAR" precision="4000" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="event_id,i"/>
+      <foreign-key name="FK_hjmlc3lmhedtk9jw71kssif9o" columns="event_id" ref-table="logging_event" ref-schema="" ref-catalog="s2jh" ref-columns="event_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="logging_event_property" schema="" catalog="s2jh" type="TABLE">
+      <column name="event_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="mapped_key" sqlType="VARCHAR" precision="254" scale="0" nullable="false" jdbcType="12"/>
+      <column name="mapped_value" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="event_id,mapped_key"/>
+      <foreign-key name="FK_t41emp5ddc9lx9x6ir2gaj5rs" columns="event_id" ref-table="logging_event" ref-schema="" ref-catalog="s2jh" ref-columns="event_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="m_Advertising" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="adId" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="checkNum" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="fromDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="title" sqlType="VARCHAR" precision="500" scale="0" nullable="false" jdbcType="12"/>
+      <column name="toDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="adUrl" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="checkedNum" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="enable" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="sche_JobBeanCfg" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="autoStartup" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="cronExpression" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="1000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="jobClass" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
+      <column name="logRunHist" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="resultTemplate" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="runWithinCluster" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="UK_696h6dmoo1r3civ87vlx90hga" unique="true" columns="jobClass"/>
+    </table>
+    <table name="sche_JobRunHist" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="exceptionFlag" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="exceptionStack" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="fireTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="jobClass" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="jobGroup" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="jobName" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nextFireTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="nodeId" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="previousFireTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="refireCount" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="result" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="triggerGroup" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <column name="triggerName" sqlType="VARCHAR" precision="64" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="shop_SiteUser" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_al3bkn1cklfkdw9fg5bjjs9ih" columns="user_id" ref-table="auth_User" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_al3bkn1cklfkdw9fg5bjjs9ih" unique="false" columns="user_id"/>
+    </table>
+    <table name="sys_AttachmentFile" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="VARCHAR" precision="80" scale="0" nullable="false" jdbcType="12"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="entityClassName" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="entityFileCategory" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="entityId" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fileDescription" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fileExtension" sqlType="VARCHAR" precision="8" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fileLength" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="fileRealName" sqlType="VARCHAR" precision="500" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fileRelativePath" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fileType" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lastTouchBy" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lastTouchTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="sys_ConfigProperty" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="htmlValue" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="propDescn" sqlType="VARCHAR" precision="2000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="propKey" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="propName" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12"/>
+      <column name="simpleValue" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="UK_h0w0edump8t45j7tthixc03ec" unique="true" columns="propKey"/>
+    </table>
+    <table name="sys_DataDict" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="disabled" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="orderRank" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="primaryKey" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
+      <column name="primaryValue" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="richTextValue" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="secondaryKey" sqlType="VARCHAR" precision="128" scale="0" nullable="true" jdbcType="12"/>
+      <column name="secondaryValue" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="parent_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_gk6agt906afpjryc2hemdwa1u" columns="parent_id" ref-table="sys_DataDict" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_gk6agt906afpjryc2hemdwa1u" table="sys_DataDict" schema="" catalog="s2jh" columns="parent_id"/>
+      <index name="UK_lmpkwc7vfx2vbijy5hdmc2h9j" unique="true" columns="parent_id,primaryKey,secondaryKey"/>
+    </table>
+    <table name="sys_Menu" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="controllerClass" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="controllerMethod" sqlType="VARCHAR" precision="128" scale="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="1000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="disabled" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="inheritLevel" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="initOpen" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="name" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="orderRank" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="path" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="rebuildTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="style" sqlType="VARCHAR" precision="128" scale="0" nullable="true" jdbcType="12"/>
+      <column name="url" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="parent_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="UK_48dn1f12tdkiud21741dtpu1" unique="true" columns="path"/>
+    </table>
+    <table name="sys_NotifyMessage" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="attachmentSize" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="emailPush" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="expireTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="externalLink" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="htmlContent" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="mgmtShow" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="orderRank" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="publishTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="readUserCount" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="siteShow" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="smsPush" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="targetUser_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_cgx7786vw273a731nx2r69iaj" columns="targetUser_id" ref-table="auth_User" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_1j5tu8dgxxyffkx7rsw1arik7" table="sys_NotifyMessageRead" schema="" catalog="s2jh" columns="notifyMessage_id"/>
+      <index name="FK_cgx7786vw273a731nx2r69iaj" unique="false" columns="targetUser_id"/>
+    </table>
+    <table name="sys_NotifyMessageRead" schema="" catalog="s2jh" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="optlock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="firstReadTime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="lastReadTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="readTotalCount" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="notifyMessage_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="readUser_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_1mvnl9t4u9ba95uwhh0dh9otd" columns="readUser_id" ref-table="auth_User" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_1j5tu8dgxxyffkx7rsw1arik7" columns="notifyMessage_id" ref-table="sys_NotifyMessage" ref-schema="" ref-catalog="s2jh" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="UK_j6q1mqd6ixpkts3ekxr33rq8f" unique="true" columns="notifyMessage_id,readUser_id"/>
+      <index name="FK_1mvnl9t4u9ba95uwhh0dh9otd" unique="false" columns="readUser_id"/>
+    </table>
+  </data-source>
+</component>
