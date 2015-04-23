@@ -6,8 +6,10 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.google.common.collect.Maps;
 import lab.s2jh.core.test.Unicode;
+import lab.s2jh.crawl.htmlunit.ExtJavaScriptErrorListener;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,28 +19,33 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TiebaCheck {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String url = "http://tieba.baidu.com/f?ie=utf-8&kw=%E5%9B%BE%E6%8B%89%E4%B8%81";
         String adTitle = " 狂促！奔腾双核+GT730独显+19.5LED液晶显示器惊爆2799元！ ";
-        WebClient webClient = buildWebClient();
-        printCookies(webClient);
-        WebRequest request = new WebRequest(new URL(url));
-        request.setHttpMethod(HttpMethod.GET);
-        request.setAdditionalHeaders(getAdditionalHeaders());
-        printAdditionalHeaders(request);
-        HtmlPage page = webClient.getPage(request);
-        printAdditionalHeaders(request);
-        printResponseHeaders(page.getWebResponse());
-        printCookies(webClient);
-        List<String> adList = getAdJsonList(page, adTitle);
+        try {
+            WebClient webClient = buildWebClient();
+            WebRequest request = new WebRequest(new URL(url));
+            request.setHttpMethod(HttpMethod.GET);
+            request.setAdditionalHeaders(getAdditionalHeaders());
+            printAdditionalHeaders(request);
+            HtmlPage page = webClient.getPage(request);
+            printAdditionalHeaders(request);
+            printResponseHeaders(page.getWebResponse());
+            printCookies(webClient);
+            List<String> adList = getAdJsonList(page, adTitle);
+            verifyAd(adList.get(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     public static WebClient buildWebClient() {
         WebClient webClient = new WebClient(BrowserVersion.FIREFOX_17);
-        webClient.getOptions().setJavaScriptEnabled(true);
+        webClient.getOptions().setJavaScriptEnabled(false);
         webClient.setAjaxController(new NicelyResynchronizingAjaxController());
         webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.setJavaScriptErrorListener(new ExtJavaScriptErrorListener());
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
         webClient.getOptions().setTimeout(10000);
@@ -98,5 +105,11 @@ public class TiebaCheck {
         for (Cookie cookie : cookies) {
             System.out.println(String.format("--------Cookie domain: %s name: %s value:%s ", cookie.getDomain(), cookie.getName(), cookie.getValue()));
         }
+    }
+
+    public static boolean verifyAd(String adData) throws ParseException {
+        JSONParser jsonParser = new JSONParser();
+        Object o = jsonParser.parse(adData.replace("'","\""));
+        return false;
     }
 }

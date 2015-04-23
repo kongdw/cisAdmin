@@ -6,9 +6,6 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by irock on 15-4-21.
- */
 public class Unicode {
     public static String getUnicode(String s) {
         try {
