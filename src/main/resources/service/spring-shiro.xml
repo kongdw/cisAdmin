@@ -76,7 +76,7 @@
 	<bean id="adminLogoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 		<property name="redirectUrl" value="/admin" />
 	</bean>
-	
+
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="filters">
@@ -91,7 +91,7 @@
 			</map>
 		</property>
 		<property name="securityManager" ref="securityManager" />
-		<!--  
+		<!--
 		anon	org.apache.shiro.web.filter.authc.AnonymousFilter
 		authc	org.apache.shiro.web.filter.authc.FormAuthenticationFilter
 		authcBasic	org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter
@@ -107,7 +107,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/assets/** = anon
-				
+
 				/w/login = authcWww
 				/w/logout = logoutWww
 				/w* = anon

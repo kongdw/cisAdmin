@@ -22,4 +22,9 @@ public class GlobalConstant {
         @MetaData(value = "女")
         F;
     }
+
+    public static enum ProxyType {
+        Anonymous, Transparent, Distorting, Socks5, Socks4, Other
+    }
+
 }

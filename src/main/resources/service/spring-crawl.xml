@@ -38,8 +38,11 @@
                 <bean class="lab.s2jh.crawl.impl.TMallCategoryParseFilter" parent="abstractParseFilter">
                     <property name="urlMatchRegex" value="http://.*.tmall.com/category.htm.*pageNo=.*"/>
                 </bean>
-                <bean class="lab.s2jh.crawl.impl.ProxyListsParseFilter" parent="abstractParseFilter">
-                    <property name="urlMatchRegex" value="http://www.proxylists.net/cn_(.*)_ext.html"/>
+                <bean class="lab.s2jh.crawl.impl.ProxyListsSingleParseFilter" parent="abstractParseFilter">
+                    <property name="urlMatchRegex" value="http://www.proxylists.net/cn_([1-9]{1,3})_ext.html"/>
+                </bean>
+                <bean class="lab.s2jh.crawl.impl.ProxyListsCategoryParseFilter" parent="abstractParseFilter">
+                    <property name="urlMatchRegex" value="http://www.proxylists.net/cn_0_ext.html"/>
                 </bean>
                 <bean class="lab.s2jh.crawl.impl.TieBaParseFilter" parent="abstractParseFilter">
                     <property name="urlMatchRegex" value="http://tieba.baidu.com/link\?.*?"/>
@@ -48,4 +51,8 @@
         </property>
     </bean>
 
+    <bean id="checkProxyService" class="lab.s2jh.module.schedule.service.ProxyCheckService">
+        <property name="asyncProxyCheckService" ref="asyncProxyCheckService"/>
+        <property name="checkTaskExecutor" ref="checkTaskExecutor"/>
+    </bean>
 </beans>

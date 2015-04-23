@@ -39,6 +39,6 @@ public class TiebaAdCheckJob extends BaseQuartzJobBean {
             ad.setCheckedNum(checkedNum + 1);
             advertisingService.save(ad);
         }
-        return null;
+        return "成功完成一次点击!";
     }
 }

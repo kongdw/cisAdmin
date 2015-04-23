@@ -35,9 +35,4 @@ public class AdvertisingService extends BaseService<Advertising, Long> {
         return advertisingDao.findByEnabledAndDateBetweenFromDateToDate(enable, currentDate, currentDate);
     }
 
-//    @Async
-//    @Transactional(propagation = Propagation.REQUIRES_NEW)
-//    public void asyncSave(Advertising ad){
-//        super.save(ad);
-//    }
 }

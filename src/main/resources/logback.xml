@@ -6,13 +6,13 @@
 		</encoder>
 	</appender>
 
-	<logger name="druid.sql" level="DEBUG" additivity="false">
+	<!--<logger name="druid.sql" level="DEBUG" additivity="false">-->
+		<!--<appender-ref ref="STDOUT" />-->
+	<!--</logger>-->
+	<logger name="lab.s2jh" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
-	<logger name="lab.s2jh" level="DEBUG" additivity="false">
-		<appender-ref ref="STDOUT" />
-	</logger>
-	<logger name="s2jh.biz" level="DEBUG" additivity="false">
+	<logger name="s2jh.biz" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 

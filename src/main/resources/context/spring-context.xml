@@ -116,5 +116,6 @@
     <!--<context:component-scan base-package="lab.s2jh" scoped-proxy="targetClass"/>-->
     <!--<task:annotation-driven executor="crawlTaskExecutor" />-->
     <task:executor id="crawlTaskExecutor" pool-size="10" />
+    <task:executor id="checkTaskExecutor" pool-size="20"/>
 
 </beans>
