@@ -121,6 +121,68 @@ js = {
     'asyncHTML': '<li class=\"f9da47c8ba  clearfix\" data-daid=\"12592\">\n    <div class=\"t_con clearfix\">\n        <div class=\"threadlist_li_left\">\n            <div class=\"threadlist_rep_num\" title=\"推广\">推广<\/div>\n        <\/div>\n        <div class=\"threadlist_li_right\">\n            <div class=\"threadlist_lz clearfix\">\n                <div class=\"threadlist_text threadlist_title notStarList\">\n                    <a class=\"j_click_stats\" href=\"\/link?client_type=pc_web&tbjump=lid%253D1299122220_12592_4_74075_%2526url%253D3dc31-s8fUNLHbtmvHfGUmBUlLsCW6BkaBD4rGph5hByJFbf080cc7KR7y8EP6SSCpNCMuxURiBhOTA7tXR5187cHgyaT2j-7bcnp2dEjLqV9JSsZGEJMCzjCjYIhuEhahoHLShrNvBosBh3Q09fL_CaFvEMEStGQsC7xgCRGZHkhip75WQ5bl_a2XX1w447CUJjnrpUhw4B_ZLS5htO_x7PFk4arxssj50XJ6XHzfq_rjNCYJINdwO3WWAgM6vTsV-pWefxMXIlZMXo7qEHjPUqGGspUClL3RvMR27HSzb5ATyMryoj8cu1AsTVhMrpSxsX0akcIkCnBT0r2BZ_NFz4BXRk8oEl6XqQY01LtjHw-KJUMOVOY2_kJjRIpQB3NZnjeQhrqfDlYBhNDtXkgkkSjheMkj0n2pQR-7oWd-jm7qlBdenMOCp4ZXjCIgxfG38DaPJuDQ4qV70hmsvlD4Boa9ahAkHJD3DSXE6-Irj0P0EZj5LgN0ak8OqgpjcrH1lJPVgc0rzWeXkE7iT1vRHWHpxWBMkcO2F-uzn53TUPTttpHNUVvuzUCTZuUrJ8Hfm3KtQtrcAyh4bh_ckF7k8jvwQEjptUx2MJPFfCUtDBDrwkeXnUMPi7RXPQJA6Eq6BF3n31z4LAL19xueHJC_GpZ7SqEEhQWY0go7IyYnibdPjC7jx0sd7BU7KvZY9vCELpl0A-aobY21i-5cLRymhhOiBFDozP836QRd_7p84o4B2uzezTQaTBFQz5HLR682IwyeoJMBxNyC6lZBMMclF8-i3GQY70-fL8M898UWrynNI9uzxFPVkwK86TXsDlqjzTtj13elGJsR_wVLEIqAeVON50NgQfWrEx5oM8TfJou4nr&ie=utf-8&task=&locate=&page=pt-pc-frsui&type=click&url=http%3A%2F%2Ftieba.baidu.com%2Ff%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581&ie=utf-8&refer=&ie=utf-8&fid=74075&ie=utf-8&fname=%E5%9B%BE%E6%8B%89%E4%B8%81&ie=utf-8&uid=&uname=&is_new_user=&tid=&_t=1429777299&obj_id=12592\" title=\"【直播】三国掐架 我们国王被打了\"\n                    target=\"_blank\" data-locate=\"frs_标题\">【直播】三国掐架 我们国王被打了<\/a>\n                    <span><\/span>\n                <\/div>\n                <div class=\"threadlist_author\">\n                    <span class=\"tb_icon_author\" title=\"主题作者: 贴吧游戏\">\n                        <a class=\"j_click_stats\" href=\"\/link?client_type=pc_web&tbjump=lid%253D1299122220_12592_4_74075_%2526url%253D3dc31-s8fUNLHbtmvHfGUmBUlLsCW6BkaBD4rGph5hByJFbf080cc7KR7y8EP6SSCpNCMuxURiBhOTA7tXR5187cHgyaT2j-7bcnp2dEjLqV9JSsZGEJMCzjCjYIhuEhahoHLShrNvBosBh3Q09fL_CaFvEMEStGQsC7xgCRGZHkhip75WQ5bl_a2XX1w447CUJjnrpUhw4B_ZLS5htO_x7PFk4arxssj50XJ6XHzfq_rjNCYJINdwO3WWAgM6vTsV-pWefxMXIlZMXo7qEHjPUqGGspUClL3RvMR27HSzb5ATyMryoj8cu1AsTVhMrpSxsX0akcIkCnBT0r2BZ_NFz4BXRk8oEl6XqQY01LtjHw-KJUMOVOY2_kJjRIpQB3NZnjeQhrqfDlYBhNDtXkgkkSjheMkj0n2pQR-7oWd-jm7qlBdenMOCp4ZXjCIgxfG38DaPJuDQ4qV70hmsvlD4Boa9ahAkHJD3DSXE6-Irj0P0EZj5LgN0ak8OqgpjcrH1lJPVgc0rzWeXkE7iT1vRHWHpxWBMkcO2F-uzn53TUPTttpHNUVvuzUCTZuUrJ8Hfm3KtQtrcAyh4bh_ckF7k8jvwQEjptUx2MJPFfCUtDBDrwkeXnUMPi7RXPQJA6Eq6BF3n31z4LAL19xueHJC_GpZ7SqEEhQWY0go7IyYnibdPjC7jx0sd7BU7KvZY9vCELpl0A-aobY21i-5cLRymhhOiBFDozP836QRd_7p84o4B2uzezTQaTBFQz5HLR682IwyeoJMBxNyC6lZBMMclF8-i3GQY70-fL8M898UWrynNI9uzxFPVkwK86TXsDlqjzTtj13elGJsR_wVLEIqAeVON50NgQfWrEx5oM8TfJou4nr&ie=utf-8&task=&locate=&page=pt-pc-frsui&type=click&url=http%3A%2F%2Ftieba.baidu.com%2Ff%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581&ie=utf-8&refer=&ie=utf-8&fid=74075&ie=utf-8&fname=%E5%9B%BE%E6%8B%89%E4%B8%81&ie=utf-8&uid=&uname=&is_new_user=&tid=&_t=1429777299&obj_id=12592\" target=\"_blank\" data-locate=\"frs_用户名\">贴吧游戏<\/a>\n                    <\/span>\n                <\/div>\n            <\/div>\n            <div class=\"threadlist_detail clearfix\">\n                <div class=\"threadlist_text\">\n                    <div class=\"threadlist_abs threadlist_abs_onlyline\">有高手在吗？ 帮看看该怎么破？<\/div>\n                    <div class=\"small_wrap j_small_wrap\" is_handle=\"true\">\n                        <ul class=\"threadlist_media\"><li>\n    <div class=\"vpic_wrap\">\n        <a class=\"j_click_stats\" href=\"\/link?client_type=pc_web&tbjump=lid%253D1299122220_12592_4_74075_%2526url%253D3dc31-s8fUNLHbtmvHfGUmBUlLsCW6BkaBD4rGph5hByJFbf080cc7KR7y8EP6SSCpNCMuxURiBhOTA7tXR5187cHgyaT2j-7bcnp2dEjLqV9JSsZGEJMCzjCjYIhuEhahoHLShrNvBosBh3Q09fL_CaFvEMEStGQsC7xgCRGZHkhip75WQ5bl_a2XX1w447CUJjnrpUhw4B_ZLS5htO_x7PFk4arxssj50XJ6XHzfq_rjNCYJINdwO3WWAgM6vTsV-pWefxMXIlZMXo7qEHjPUqGGspUClL3RvMR27HSzb5ATyMryoj8cu1AsTVhMrpSxsX0akcIkCnBT0r2BZ_NFz4BXRk8oEl6XqQY01LtjHw-KJUMOVOY2_kJjRIpQB3NZnjeQhrqfDlYBhNDtXkgkkSjheMkj0n2pQR-7oWd-jm7qlBdenMOCp4ZXjCIgxfG38DaPJuDQ4qV70hmsvlD4Boa9ahAkHJD3DSXE6-Irj0P0EZj5LgN0ak8OqgpjcrH1lJPVgc0rzWeXkE7iT1vRHWHpxWBMkcO2F-uzn53TUPTttpHNUVvuzUCTZuUrJ8Hfm3KtQtrcAyh4bh_ckF7k8jvwQEjptUx2MJPFfCUtDBDrwkeXnUMPi7RXPQJA6Eq6BF3n31z4LAL19xueHJC_GpZ7SqEEhQWY0go7IyYnibdPjC7jx0sd7BU7KvZY9vCELpl0A-aobY21i-5cLRymhhOiBFDozP836QRd_7p84o4B2uzezTQaTBFQz5HLR682IwyeoJMBxNyC6lZBMMclF8-i3GQY70-fL8M898UWrynNI9uzxFPVkwK86TXsDlqjzTtj13elGJsR_wVLEIqAeVON50NgQfWrEx5oM8TfJou4nr&ie=utf-8&task=&locate=&page=pt-pc-frsui&type=click&url=http%3A%2F%2Ftieba.baidu.com%2Ff%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581&ie=utf-8&refer=&ie=utf-8&fid=74075&ie=utf-8&fname=%E5%9B%BE%E6%8B%89%E4%B8%81&ie=utf-8&uid=&uname=&is_new_user=&tid=&_t=1429777299&obj_id=12592\" target=\"_blank\">\n            <img src=\"http:\/\/tb1.bdstatic.com\/tb\/cms\/ngmis\/adsense\/file_1429234313882.jpg\" alt=\"贴吧图片\">\n        <\/a>\n    <\/div>\n<\/li><li>\n    <div class=\"vpic_wrap\">\n        <a class=\"j_click_stats\" href=\"\/link?client_type=pc_web&tbjump=lid%253D1299122220_12592_4_74075_%2526url%253D3dc31-s8fUNLHbtmvHfGUmBUlLsCW6BkaBD4rGph5hByJFbf080cc7KR7y8EP6SSCpNCMuxURiBhOTA7tXR5187cHgyaT2j-7bcnp2dEjLqV9JSsZGEJMCzjCjYIhuEhahoHLShrNvBosBh3Q09fL_CaFvEMEStGQsC7xgCRGZHkhip75WQ5bl_a2XX1w447CUJjnrpUhw4B_ZLS5htO_x7PFk4arxssj50XJ6XHzfq_rjNCYJINdwO3WWAgM6vTsV-pWefxMXIlZMXo7qEHjPUqGGspUClL3RvMR27HSzb5ATyMryoj8cu1AsTVhMrpSxsX0akcIkCnBT0r2BZ_NFz4BXRk8oEl6XqQY01LtjHw-KJUMOVOY2_kJjRIpQB3NZnjeQhrqfDlYBhNDtXkgkkSjheMkj0n2pQR-7oWd-jm7qlBdenMOCp4ZXjCIgxfG38DaPJuDQ4qV70hmsvlD4Boa9ahAkHJD3DSXE6-Irj0P0EZj5LgN0ak8OqgpjcrH1lJPVgc0rzWeXkE7iT1vRHWHpxWBMkcO2F-uzn53TUPTttpHNUVvuzUCTZuUrJ8Hfm3KtQtrcAyh4bh_ckF7k8jvwQEjptUx2MJPFfCUtDBDrwkeXnUMPi7RXPQJA6Eq6BF3n31z4LAL19xueHJC_GpZ7SqEEhQWY0go7IyYnibdPjC7jx0sd7BU7KvZY9vCELpl0A-aobY21i-5cLRymhhOiBFDozP836QRd_7p84o4B2uzezTQaTBFQz5HLR682IwyeoJMBxNyC6lZBMMclF8-i3GQY70-fL8M898UWrynNI9uzxFPVkwK86TXsDlqjzTtj13elGJsR_wVLEIqAeVON50NgQfWrEx5oM8TfJou4nr&ie=utf-8&task=&locate=&page=pt-pc-frsui&type=click&url=http%3A%2F%2Ftieba.baidu.com%2Ff%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581&ie=utf-8&refer=&ie=utf-8&fid=74075&ie=utf-8&fname=%E5%9B%BE%E6%8B%89%E4%B8%81&ie=utf-8&uid=&uname=&is_new_user=&tid=&_t=1429777299&obj_id=12592\" target=\"_blank\">\n            <img src=\"http:\/\/tb1.bdstatic.com\/tb\/cms\/ngmis\/adsense\/file_1429234317123.jpg\" alt=\"贴吧图片\">\n        <\/a>\n    <\/div>\n<\/li><li>\n    <div class=\"vpic_wrap\">\n        <a class=\"j_click_stats\" href=\"\/link?client_type=pc_web&tbjump=lid%253D1299122220_12592_4_74075_%2526url%253D3dc31-s8fUNLHbtmvHfGUmBUlLsCW6BkaBD4rGph5hByJFbf080cc7KR7y8EP6SSCpNCMuxURiBhOTA7tXR5187cHgyaT2j-7bcnp2dEjLqV9JSsZGEJMCzjCjYIhuEhahoHLShrNvBosBh3Q09fL_CaFvEMEStGQsC7xgCRGZHkhip75WQ5bl_a2XX1w447CUJjnrpUhw4B_ZLS5htO_x7PFk4arxssj50XJ6XHzfq_rjNCYJINdwO3WWAgM6vTsV-pWefxMXIlZMXo7qEHjPUqGGspUClL3RvMR27HSzb5ATyMryoj8cu1AsTVhMrpSxsX0akcIkCnBT0r2BZ_NFz4BXRk8oEl6XqQY01LtjHw-KJUMOVOY2_kJjRIpQB3NZnjeQhrqfDlYBhNDtXkgkkSjheMkj0n2pQR-7oWd-jm7qlBdenMOCp4ZXjCIgxfG38DaPJuDQ4qV70hmsvlD4Boa9ahAkHJD3DSXE6-Irj0P0EZj5LgN0ak8OqgpjcrH1lJPVgc0rzWeXkE7iT1vRHWHpxWBMkcO2F-uzn53TUPTttpHNUVvuzUCTZuUrJ8Hfm3KtQtrcAyh4bh_ckF7k8jvwQEjptUx2MJPFfCUtDBDrwkeXnUMPi7RXPQJA6Eq6BF3n31z4LAL19xueHJC_GpZ7SqEEhQWY0go7IyYnibdPjC7jx0sd7BU7KvZY9vCELpl0A-aobY21i-5cLRymhhOiBFDozP836QRd_7p84o4B2uzezTQaTBFQz5HLR682IwyeoJMBxNyC6lZBMMclF8-i3GQY70-fL8M898UWrynNI9uzxFPVkwK86TXsDlqjzTtj13elGJsR_wVLEIqAeVON50NgQfWrEx5oM8TfJou4nr&ie=utf-8&task=&locate=&page=pt-pc-frsui&type=click&url=http%3A%2F%2Ftieba.baidu.com%2Ff%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581&ie=utf-8&refer=&ie=utf-8&fid=74075&ie=utf-8&fname=%E5%9B%BE%E6%8B%89%E4%B8%81&ie=utf-8&uid=&uname=&is_new_user=&tid=&_t=1429777299&obj_id=12592\" target=\"_blank\">\n            <img src=\"http:\/\/tb1.bdstatic.com\/tb\/cms\/ngmis\/adsense\/file_1429234319861.png\" alt=\"贴吧图片\">\n        <\/a>\n    <\/div>\n<\/li><\/ul>\n                    <\/div>\n                <\/div>\n                <div class=\"threadlist_author\">\n                    <span class=\"tb_icon_author_rely\" title=\"最后回复人：贴吧游戏\">\n                        <a class=\"j_click_stats\" href=\"\/link?client_type=pc_web&tbjump=lid%253D1299122220_12592_4_74075_%2526url%253D3dc31-s8fUNLHbtmvHfGUmBUlLsCW6BkaBD4rGph5hByJFbf080cc7KR7y8EP6SSCpNCMuxURiBhOTA7tXR5187cHgyaT2j-7bcnp2dEjLqV9JSsZGEJMCzjCjYIhuEhahoHLShrNvBosBh3Q09fL_CaFvEMEStGQsC7xgCRGZHkhip75WQ5bl_a2XX1w447CUJjnrpUhw4B_ZLS5htO_x7PFk4arxssj50XJ6XHzfq_rjNCYJINdwO3WWAgM6vTsV-pWefxMXIlZMXo7qEHjPUqGGspUClL3RvMR27HSzb5ATyMryoj8cu1AsTVhMrpSxsX0akcIkCnBT0r2BZ_NFz4BXRk8oEl6XqQY01LtjHw-KJUMOVOY2_kJjRIpQB3NZnjeQhrqfDlYBhNDtXkgkkSjheMkj0n2pQR-7oWd-jm7qlBdenMOCp4ZXjCIgxfG38DaPJuDQ4qV70hmsvlD4Boa9ahAkHJD3DSXE6-Irj0P0EZj5LgN0ak8OqgpjcrH1lJPVgc0rzWeXkE7iT1vRHWHpxWBMkcO2F-uzn53TUPTttpHNUVvuzUCTZuUrJ8Hfm3KtQtrcAyh4bh_ckF7k8jvwQEjptUx2MJPFfCUtDBDrwkeXnUMPi7RXPQJA6Eq6BF3n31z4LAL19xueHJC_GpZ7SqEEhQWY0go7IyYnibdPjC7jx0sd7BU7KvZY9vCELpl0A-aobY21i-5cLRymhhOiBFDozP836QRd_7p84o4B2uzezTQaTBFQz5HLR682IwyeoJMBxNyC6lZBMMclF8-i3GQY70-fL8M898UWrynNI9uzxFPVkwK86TXsDlqjzTtj13elGJsR_wVLEIqAeVON50NgQfWrEx5oM8TfJou4nr&ie=utf-8&task=&locate=&page=pt-pc-frsui&type=click&url=http%3A%2F%2Ftieba.baidu.com%2Ff%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581%3Fie%3Dutf-8%26kw%3D%25E5%259B%25BE%25E6%258B%2589%25E4%25B8%2581&ie=utf-8&refer=&ie=utf-8&fid=74075&ie=utf-8&fname=%E5%9B%BE%E6%8B%89%E4%B8%81&ie=utf-8&uid=&uname=&is_new_user=&tid=&_t=1429777299&obj_id=12592\" target=\"_blank\" data-locate=\"frs_用户名\">贴吧游戏<\/a>\n                    <\/span>\n                    <span class=\"threadlist_reply_date j_reply_data\" title=\"最后回复时间\"><\/span>\n                <\/div>\n            <\/div>\n        <\/div>\n    <\/div>\n<\/li>\n\n<style>\n    li.f9da47c8ba .vpic_wrap img{\n        width: 120px;\n        height: 90px;\n    }\n<\/style>\n', /* 异步加载的广告字符串 */
     'isAsync': '1', /* 是否为异步加载 */
     'needStats': true                       /* 是否需要点击统计 */
+};
+
+js1 = {
+    'adData': {
+        "id": "10856",
+        "name": "凤巢文字2",
+        "typeid": "0016",
+        "pos_name": 3,
+        "loc_code": "p0001",
+        "client_type": "PC",
+        "page_name": "FRS",
+        "app_type": "0",
+        "tpl_name": "7",
+        "locator": "#thread_list .j_thread_list:not(.thread_top):eq(2)",
+        "load_type": "before",
+        "first_screen": "1",
+        "url_type": "1",
+        "throw_type": "0",
+        "url": "http:\/\/tieba.baidu.com\/tb\/zt\/fengchaofeedtext\/index.html?",
+        "ios_url": "",
+        "apk_url": "",
+        "apk_name": "",
+        "first_name": "凤巢",
+        "second_name": "电商",
+        "goods_info": [{
+            "iframe_url": "http:\/\/tieba.baidu.com\/tb\/zt\/fengchaofeedtext\/index.html?",
+            "id": "9153",
+            "iframe_width": 630,
+            "iframe_height": 106,
+            "url_query": "{&quot;custom&quot;:{&quot;forumNameGBK&quot;:&quot;word&quot;}}",
+            "custom_style": "1"
+        }],
+        "cpid": 0,
+        "abtest": "",
+        "price": 100,
+        "plan_id": 1,
+        "user_id": "37676788",
+        "ext_info": "1_0_0_0_0_0_0_0",
+        "search_id": null,
+        "imTimeSign": null,
+        "ad_tags": [],
+        "verify": "ea6634bda783bd22fc9bba6dd2c6b611",
+        "pb_log": {
+            "forum_id": 74075,
+            "forum_name": "图拉丁",
+            "forum_dir": "电脑数码",
+            "forum_second_dir": "电脑及硬件",
+            "click_url": "",
+            "action_type": 2,
+            "client_type": 1,
+            "task": "tbda",
+            "loc_param": 1,
+            "page": 2,
+            "location": "p0001"
+        },
+        "click_url_params": "",
+        "forumNameGBK": "%CD%BC%C0%AD%B6%A1&ie=utf-8"
+    }, /* 广告数据 */
+    'className': 'v5da4fe7ce', /* 广告定位器 */
+    'asyncHTML': '', /* 异步加载的广告字符串 */
+    'isAsync': '', /* 是否为异步加载 */
+    'isIframe': true                        /* 是否为 iframe 广告 */
 }
 
 /**

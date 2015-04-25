@@ -10,21 +10,19 @@ import lab.s2jh.crawl.htmlunit.ExtJavaScriptErrorListener;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TiebaCheck {
     public static void main(String[] args) {
         String url = "http://tieba.baidu.com/f?ie=utf-8&kw=%E5%9B%BE%E6%8B%89%E4%B8%81";
-        String adTitle = " 狂促！奔腾双核+GT730独显+19.5LED液晶显示器惊爆2799元！ ";
+        String adTitle = "贴吧会员周年庆，绝版星座王霸气来袭";
         try {
             WebClient webClient = buildWebClient();
-            WebRequest request = new WebRequest(new URL(url));
+            WebRequest request = buildWebRequest(url);
             request.setHttpMethod(HttpMethod.GET);
             request.setAdditionalHeaders(getAdditionalHeaders());
             printAdditionalHeaders(request);
@@ -33,7 +31,10 @@ public class TiebaCheck {
             printResponseHeaders(page.getWebResponse());
             printCookies(webClient);
             List<String> adList = getAdJsonList(page, adTitle);
-            verifyAd(adList.get(0));
+            for(String adstr : adList){
+                verifyAd(adstr);
+                checkAd(adstr);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,6 +55,24 @@ public class TiebaCheck {
         return webClient;
     }
 
+    public static WebRequest buildWebRequest(String url) throws MalformedURLException {
+       return buildWebRequest(url,null);
+    }
+
+    public static WebRequest buildWebRequest(String url,Map<String, String> headers) throws MalformedURLException {
+        return buildWebRequest(url,headers,null);
+    }
+
+    public static WebRequest buildWebRequest(String url,Map<String, String> headers,List<NameValuePair> parameters) throws MalformedURLException {
+        WebRequest webRequest = new WebRequest(new URL(url));
+        if(parameters != null && parameters.size()>0){
+            webRequest.setRequestParameters(parameters);
+        }
+        if(headers!= null && headers.size() > 0){
+            webRequest.setAdditionalHeaders(headers);
+        }
+        return webRequest;
+    }
     public static Map<String, String> getAdditionalHeaders() {
         Map<String, String> additionalHeaders = Maps.newHashMap();
         additionalHeaders.put("Connection", "keep-alive");
@@ -107,7 +126,46 @@ public class TiebaCheck {
         }
     }
 
-    public static boolean verifyAd(String adData) throws ParseException {
+    public static boolean verifyAd(String adData) throws ParseException, MalformedURLException {
+        String baseUrl ="http://tieba.baidu.com/billboard/pushlog/";
+        WebRequest webRequest = buildWebRequest(baseUrl);
+        List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+        NameValuePair parameter = new NameValuePair("t",String.valueOf(new Date().getTime()));
+        /*
+        t:1429865028822
+        client_type:pc_web
+        task:tbda
+        page:frs
+        fid:74075
+        tid:
+        uid:43415994
+        da_task:tbda
+        da_fid:74075
+        da_tid:
+        da_uid:43415994
+        da_page:frs
+        da_type_id:0002
+        da_obj_id:13060
+        da_good_id:21786
+        da_obj_name:WCA报名FRS15
+        da_first_name:游戏
+        da_second_name:游戏
+        da_cpid:4
+        da_abtest:
+        da_price:100
+        da_verify:465a117c81d06d37629d6cde203a083a
+        da_plan_id:1
+        da_ext_info:1_0_0_0_1_0_0_0
+        da_client_type:PC
+        da_locate:15
+        da_type:show
+        */
+        JSONParser jsonParser = new JSONParser();
+        Object o = jsonParser.parse(adData.replace("'","\""));
+        return false;
+    }
+
+    public static boolean checkAd(String adData) throws ParseException {
         JSONParser jsonParser = new JSONParser();
         Object o = jsonParser.parse(adData.replace("'","\""));
         return false;
