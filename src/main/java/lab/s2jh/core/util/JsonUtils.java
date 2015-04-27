@@ -2,6 +2,7 @@ package lab.s2jh.core.util;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,19 @@ public class JsonUtils {
 
     private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
-    private final static ObjectMapper objectMapper = new ObjectMapper();
+    private final static ObjectMapper objectMapper;
+
+    private JsonUtils() {
+    }
+
+    static {
+        objectMapper = new ObjectMapper();
+        objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+    }
+
+    public static ObjectMapper getMapperInstance(boolean singleQuotes) {
+        return objectMapper;
+    }
 
     public static String writeValueAsString(Object value) {
         try {
