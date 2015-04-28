@@ -1,6 +1,5 @@
 package lab.s2jh.module.sys.service.test;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.*;
@@ -19,18 +18,19 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TiebaCheck {
+
+    private static WebClient webClient = buildWebClient();
+    private static String adUrl = "http://tieba.baidu.com/f?ie=utf-8&kw=%E7%AC%94%E8%AE%B0%E6%9C%AC";
+
     public static void main(String[] args) {
-        String url = "http://tieba.baidu.com/f?ie=utf-8&kw=%E7%AC%94%E8%AE%B0%E6%9C%AC";
-        String adTitle = "五一狂降！全金属蓝天模具战神Z7升级128G SSD仅7999";
+        String adTitle = "五一大促！神舟2G独显i3轻薄本2199元起，游戏学习都搞定！";
         try {
-            WebClient webClient = buildWebClient();
-            WebRequest request = buildWebRequest(url);
+            WebRequest request = buildWebRequest(adUrl);
             request.setHttpMethod(HttpMethod.GET);
             request.setAdditionalHeaders(getAdditionalHeaders(""));
             printAdditionalHeaders(request);
@@ -38,14 +38,11 @@ public class TiebaCheck {
             printAdditionalHeaders(request);
             printResponseHeaders(page.getWebResponse());
             printCookies(webClient);
-            HtmlPage obj = webClient.getPage("http://tieba.baidu.com/billboard/pushlog/?t=1429963136356&client_type=pc_web&task=tbda&page=frs&fid=52&tid=&uid=&da_task=tbda&da_fid=52&da_tid=&da_uid=&da_page=frs&da_type_id=0002&da_obj_id=13329&da_good_id=22678&da_obj_name=%E7%A5%9E%E8%88%9F-%E6%98%9F%E5%B0%98&da_first_name=%E9%9D%9E%E6%A0%87&da_second_name=%E7%94%B5%E5%95%86&da_cpid=5&da_abtest=&da_price=100&da_verify=9f1afe2c58927e5cf2489e721d9bdb84&da_plan_id=1&da_ext_info=1_0_0_0_5_0_0_0&da_client_type=PC&da_locate=3&da_type=show");
-            System.out.println(obj.asText());
             List<String> adList = getAdJsonList(page, adTitle);
             for (String adstr : adList) {
-                verifyAd(adstr);
-                checkAd(adstr);
-                String s = getVerifyUrl(adstr);
-                System.out.println(s);
+                verifyAd(getVerifyUrl(adstr, true),true);
+                verifyAd(getVerifyUrl(adstr, false),false);
+                System.out.println("广告点击: "+checkAd(adstr,"神舟"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,28 +138,56 @@ public class TiebaCheck {
         }
     }
 
-    public static boolean verifyAd(String verifyUrl) throws ParseException, IOException {
-        NameValuePair parameter = new NameValuePair("t", String.valueOf(new Date().getTime()));
-        return false;
+    public static boolean verifyAd(String verifyUrl, boolean isTrack) throws ParseException, IOException {
+        WebRequest webRequest = new WebRequest(new URL(verifyUrl));
+        Map<String, String> additionalHeaders = Maps.newHashMap();
+        additionalHeaders.put("Accept", "image/webp,*/*;q=0.8");
+        additionalHeaders.put("Accept-Encoding", "gzip, deflate, sdch");
+        additionalHeaders.put("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6");
+        additionalHeaders.put("Cache-Control", "max-age=0");
+        additionalHeaders.put("Connection", "keep-alive");
+        if (isTrack) {
+            additionalHeaders.put("Host", "static.tieba.baidu.com");
+        } else {
+            additionalHeaders.put("Host", "tieba.baidu.com");
+        }
+        additionalHeaders.put("Referer", adUrl);
+        additionalHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
+        webRequest.setAdditionalHeaders(additionalHeaders);
+        printAdditionalHeaders(webRequest);
+        Page page = webClient.getPage(webRequest);
+        printResponseHeaders(page.getWebResponse());
+        return true;
     }
 
-    public static boolean checkAd(String adData) throws ParseException {
-        return false;
-    }
-
-    public static JsonNode parserJson(String adData) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-        return mapper.readValue(adData, JsonNode.class);
-    }
-
-    public static String getVerifyUrl(String adData) throws Exception {
-        StringBuilder url = new StringBuilder("http://tieba.baidu.com/billboard/pushlog/?");
-        ObjectMapper mapper = JsonUtils.getMapperInstance(true);
+    public static boolean checkAd(String adData,String checkRegex) throws ParseException, IOException {
+        ObjectMapper mapper = JsonUtils.getMapperInstance();
         JsonNode jsonNode = mapper.readTree(adData);
-        String s = JsonPath.read("$.adData.pb_log.forum_id", jsonNode, String.class);
-        String paramJson =
-                "t=" + String.valueOf((new Date()).getTime()) +
+        String url = JsonPath.read("$.adData.url",jsonNode,String.class);
+        WebRequest webRequest = new WebRequest(new URL(url));
+        Map<String, String> additionalHeaders = Maps.newHashMap();
+        additionalHeaders.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+        additionalHeaders.put("Accept-Encoding", "gzip, deflate, sdch");
+        additionalHeaders.put("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6");
+        additionalHeaders.put("Connection", "keep-alive");
+        additionalHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
+        additionalHeaders.put("Referer",adUrl);
+        webRequest.setAdditionalHeaders(additionalHeaders);
+        HtmlPage page  = webClient.getPage(webRequest);
+
+        return page.asXml().contains(checkRegex);
+    }
+
+    public static String getVerifyUrl(String adData, boolean isTrack) throws Exception {
+        StringBuilder url = new StringBuilder();
+        if(isTrack){
+            url.append("http://static.tieba.baidu.com/tb/img/track.gif?");
+        }else {
+            url.append("http://tieba.baidu.com/billboard/pushlog/?");
+        }
+        ObjectMapper mapper = JsonUtils.getMapperInstance();
+        JsonNode jsonNode = mapper.readTree(adData);
+        String paramJson = "t=" + String.valueOf((new Date()).getTime()) +
                 "&client_type=pc_web" +
                 "&task=" + JsonPath.read("$.adData.pb_log.task", jsonNode, String.class) +
                 "&page=frs" +
@@ -187,10 +212,13 @@ public class TiebaCheck {
                 "&da_plan_id=" + JsonPath.read("$.adData.plan_id", jsonNode, Integer.class) +
                 "&da_ext_info=" + JsonPath.read("$.adData.ext_info", jsonNode, String.class) +
                 "&da_client_type=" + JsonPath.read("$.adData.client_type", jsonNode, String.class) +
+                (isTrack ? "&locate=" + JsonPath.read("$.adData.pos_name", jsonNode, String.class) : "") +
                 "&da_locate=" + JsonPath.read("$.adData.pos_name", jsonNode, String.class) +
+                (isTrack ? "&type=show" : "") +
                 "&da_type=show";
-        return encodeUrl(url.append(paramJson).toString(),"UTF-8");
+        return encodeUrl(url.append(paramJson).toString(), "UTF-8");
     }
+
     public static String encodeUrl(String url, String encodingCharset) throws UnsupportedEncodingException {
         return new URLCodec().encode(url, encodingCharset).replace("%3A", ":").replace("%2F", "/").replace("%3F", "?").replace("%3D", "=").replace("%26", "&");
     }

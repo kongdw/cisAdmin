@@ -23,7 +23,7 @@ public class JsonUtils {
         objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
     }
 
-    public static ObjectMapper getMapperInstance(boolean singleQuotes) {
+    public static ObjectMapper getMapperInstance() {
         return objectMapper;
     }
 
