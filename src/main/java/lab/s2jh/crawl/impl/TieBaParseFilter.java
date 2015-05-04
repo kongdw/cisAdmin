@@ -31,7 +31,5 @@ public class TieBaParseFilter extends AbstractParseFilter {
         //logger.debug("html page:{}",page);
     }
 
-    private Cookie getCookie(String cookieName,String val){
-        return new Cookie("BaiDu",cookieName,val);
-    }
+
 }

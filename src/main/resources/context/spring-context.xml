@@ -117,5 +117,6 @@
     <!--<task:annotation-driven executor="crawlTaskExecutor" />-->
     <task:executor id="crawlTaskExecutor" pool-size="5" />
     <task:executor id="checkTaskExecutor" pool-size="100"/>
+    <task:executor id="clickTaskExecutor" pool-size="10"/>
 
 </beans>

@@ -16,6 +16,5 @@ public interface AdvertisingDao extends BaseDao<Advertising, Long> {
     @QueryHints({ @QueryHint(name = org.hibernate.jpa.QueryHints.HINT_CACHEABLE, value = "true") })
     public List<Advertising> findAllCached();
     @Query("from Advertising where enable=? and checkedNum < checkNum and (fromDate < ? and toDate > ?) ")
-    @QueryHints({ @QueryHint(name = org.hibernate.jpa.QueryHints.HINT_CACHEABLE, value = "true") })
     public List<Advertising> findByEnabledAndDateBetweenFromDateToDate(Boolean enable,Date fromDate,Date toDate);
 }

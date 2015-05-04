@@ -42,7 +42,13 @@
                     label : '广告ID',
                     name : 'adId',
                     width : 50,
-                    editable : true,
+                    editable : false,
+                    align : 'left'
+                }, {
+                    label : '贴吧名称',
+                    name : 'baName',
+                    width : 50,
+                    editable : false,
                     align : 'left'
                 }, {
                     label : '广告标题',
@@ -52,7 +58,7 @@
                     editable : false,
                     align : 'left'
                 }, {
-                    label : '广告URL',
+                    label : '吧URL',
                     name : 'adUrlAbstract',
                     index: 'adUrl',
 //                    edittype : 'textarea',

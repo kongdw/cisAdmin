@@ -15,8 +15,7 @@
                 <value>
                     -\.(gif|GIF|jpg|JPG|png|PNG|ico|ICO|css|CSS|sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|jpeg|JPEG|bmp|BMP)$
                 </value>
-                <value>http://.*aliyuncdn.com.*</value>
-                <value>http://www.hasee.com/*</value>
+                <!--<value>http://.*aliyuncdn.com.*</value>-->
                 <value>^http://tieba.baidu.com</value>
             </set>
         </property>
@@ -31,22 +30,21 @@
         <property name="crawlTaskExecutor" ref="crawlTaskExecutor"/>
         <property name="parseFilters">
             <list>
-                <bean class="lab.s2jh.crawl.impl.TMallSingleParseFilter" parent="abstractParseFilter">
-                    <property name="urlMatchRegex" value="http://detail.tmall.*item.htm\?.*id=(.*)&amp;rn=.*"/>
-
-                </bean>
-                <bean class="lab.s2jh.crawl.impl.TMallCategoryParseFilter" parent="abstractParseFilter">
-                    <property name="urlMatchRegex" value="http://.*.tmall.com/category.htm.*pageNo=.*"/>
-                </bean>
+                <!--<bean class="lab.s2jh.crawl.impl.TMallSingleParseFilter" parent="abstractParseFilter">-->
+                    <!--<property name="urlMatchRegex" value="http://detail.tmall.*item.htm\?.*id=(.*)&amp;rn=.*"/>-->
+                <!--</bean>-->
+                <!--<bean class="lab.s2jh.crawl.impl.TMallCategoryParseFilter" parent="abstractParseFilter">-->
+                    <!--<property name="urlMatchRegex" value="http://.*.tmall.com/category.htm.*pageNo=.*"/>-->
+                <!--</bean>-->
                 <bean class="lab.s2jh.crawl.impl.ProxyListsSingleParseFilter" parent="abstractParseFilter">
                     <property name="urlMatchRegex" value="http://www.proxylists.net/cn_([1-9]{1,3})_ext.html"/>
                 </bean>
                 <bean class="lab.s2jh.crawl.impl.ProxyListsCategoryParseFilter" parent="abstractParseFilter">
                     <property name="urlMatchRegex" value="http://www.proxylists.net/cn_0_ext.html"/>
                 </bean>
-                <bean class="lab.s2jh.crawl.impl.TieBaParseFilter" parent="abstractParseFilter">
-                    <property name="urlMatchRegex" value="http://tieba.baidu.com/link\?.*?"/>
-                </bean>
+                <!--<bean class="lab.s2jh.crawl.impl.TieBaParseFilter" parent="abstractParseFilter">-->
+                    <!--<property name="urlMatchRegex" value="http://tieba.baidu.com/f\?(.*kw)"/>-->
+                <!--</bean>-->
             </list>
         </property>
     </bean>

@@ -40,6 +40,10 @@ public class Advertising extends BaseNativeEntity implements Comparable<Advertis
     @Lob
     private String adUrl;
 
+    @MetaData(value = "吧名")
+    @Column(nullable = false)
+    private  String baName;
+
     @MetaData(value = "目标次数")
     @Column(nullable = false)
     private Integer checkNum;

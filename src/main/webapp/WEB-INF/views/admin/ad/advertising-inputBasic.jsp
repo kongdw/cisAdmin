@@ -19,7 +19,15 @@
 		</div>
 		<div class="form-body">
 			<div class="row">
-				<div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">吧名</label>
+                        <div class="controls">
+                            <form:input path="baName" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+				<div class="col-md-6">
 					<div class="form-group">
 						<label class="control-label">广告ID</label>
 						<div class="controls">
@@ -41,7 +49,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<label class="control-label">广告URL</label>
+						<label class="control-label">吧URL</label>
 						<div class="controls">
 							<form:textarea path="adUrl" class="form-control" data-height="400px" cssStyle="height: 300px" />
 						</div>

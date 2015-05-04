@@ -1,4 +1,4 @@
-package lab.s2jh.module.sys.service.test;
+package lab.s2jh.module.schedule.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,49 +8,133 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.google.common.collect.Maps;
 import com.nebhale.jsonpath.JsonPath;
-import lab.s2jh.core.test.Unicode;
 import lab.s2jh.core.util.JsonUtils;
+import lab.s2jh.core.util.UnicodeUtils;
 import lab.s2jh.crawl.htmlunit.ExtJavaScriptErrorListener;
+import lab.s2jh.module.ad.entity.Advertising;
+import lab.s2jh.module.ad.entity.ProxyInfo;
+import lab.s2jh.module.ad.service.ProxyInfoService;
 import org.apache.commons.codec.net.URLCodec;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TiebaCheck {
+/**
+ * 广告异步点击服务
+ */
 
-    private static WebClient webClient = buildWebClient();
-    private static String adUrl = "http://tieba.baidu.com/f?ie=utf-8&kw=%E7%AC%94%E8%AE%B0%E6%9C%AC";
+@Service
+public class AsyncClickAdService {
 
-    public static void main(String[] args) {
-        String adTitle = "为游戏而生！GTX970M战神Z7彩色版7499元“好色”首发！";
+    private static final Logger logger = LoggerFactory.getLogger(AsyncClickAdService.class);
+
+    /**
+     * 异步点击广告
+     */
+    @Async("clickTaskExecutor")
+    public Future<String> startClickAdAsync(ProxyInfo proxyInfo, Advertising advertising) {
+        String result="";
         try {
-            WebRequest request = buildWebRequest(adUrl);
+            WebClient webClient = buildWebClient();
+            WebRequest request = buildWebRequest(advertising.getAdUrl());
             request.setHttpMethod(HttpMethod.GET);
-            request.setAdditionalHeaders(getAdditionalHeaders(adUrl));
+            request.setAdditionalHeaders(getAdditionalHeaders(advertising.getAdUrl()));
             printAdditionalHeaders(request);
             HtmlPage page = webClient.getPage(request);
             printAdditionalHeaders(request);
             printResponseHeaders(page.getWebResponse());
             printCookies(webClient);
-            List<String> adList = getAdJsonList(page, adTitle);
+            List<String> adList = getAdJsonList(page, advertising.getAdId());
             for (String adstr : adList) {
-                verifyAd(getVerifyUrl(adstr, true),true);
-                verifyAd(getVerifyUrl(adstr, false),false);
-                System.out.println("广告点击: "+checkAd(adstr,"神舟"));
+                verifyAd(advertising.getAdUrl(),webClient,getVerifyUrl(adstr, true),true);
+                verifyAd(advertising.getAdUrl(),webClient,getVerifyUrl(adstr, false),false);
+                result = "广告点击: "+checkAd(advertising.getAdUrl(),webClient,adstr,"神舟");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return new AsyncResult<String>(result);
     }
 
+    private static boolean check(ProxyInfo proxyInfo, Pattern pattern) {
+        ProxyConfig proxyConfig = new ProxyConfig();
+        proxyConfig.setProxyHost(proxyInfo.getIp());
+        proxyConfig.setProxyPort(proxyInfo.getPort());
+        switch (proxyInfo.getProxyType()) {
+            case Anonymous:
+            case Transparent:
+            case Distorting:
+            case Other:
+                proxyConfig.setSocksProxy(false);
+                break;
+            case Socks5:
+            case Socks4:
+                proxyConfig.setSocksProxy(true);
+                break;
+        }
+
+        WebClient webClient = new WebClient(BrowserVersion.FIREFOX_17);
+        webClient.getOptions().setJavaScriptEnabled(false);
+        webClient.getOptions().setCssEnabled(false);
+        webClient.getOptions().setProxyConfig(proxyConfig);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setRedirectEnabled(true);
+        try {
+            HtmlPage page = webClient.getPage("http://tieba.baidu.com");
+            if (page != null) {
+                String pageXml = page.asXml();
+                Matcher matcher = pattern.matcher(pageXml);
+                return matcher.find();
+            }
+
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+        }
+        return false;
+    }
+
+
     public static WebClient buildWebClient() {
+        return buildWebClient((ProxyConfig) null);
+    }
+
+    public static WebClient buildWebClient(ProxyInfo proxyInfo) {
+        if (proxyInfo != null) {
+            ProxyConfig proxyConfig = new ProxyConfig();
+            proxyConfig.setProxyHost(proxyInfo.getIp());
+            proxyConfig.setProxyPort(proxyInfo.getPort());
+            switch (proxyInfo.getProxyType()) {
+                case Anonymous:
+                case Transparent:
+                case Distorting:
+                case Other:
+                    proxyConfig.setSocksProxy(false);
+                    break;
+                case Socks5:
+                case Socks4:
+                    proxyConfig.setSocksProxy(true);
+                    break;
+            }
+            return buildWebClient(proxyConfig);
+        } else {
+            return buildWebClient();
+        }
+    }
+
+    public static WebClient buildWebClient(ProxyConfig proxyConfig) {
         WebClient webClient = new WebClient(BrowserVersion.FIREFOX_17);
         webClient.getOptions().setJavaScriptEnabled(false);
         webClient.setAjaxController(new NicelyResynchronizingAjaxController());
@@ -61,6 +145,9 @@ public class TiebaCheck {
         webClient.getOptions().setTimeout(10000);
         webClient.getCookieManager().setCookiesEnabled(true);
         webClient.waitForBackgroundJavaScript(60 * 1000);
+        if (proxyConfig != null) {
+            webClient.getOptions().setProxyConfig(proxyConfig);
+        }
         return webClient;
     }
 
@@ -119,7 +206,7 @@ public class TiebaCheck {
         Pattern pattern = Pattern.compile("\\{.*adData.*\\}");
         Matcher matcher = pattern.matcher(html);
         while (matcher.find()) {
-            String adStr = Unicode.unicodeToString(matcher.group());
+            String adStr = UnicodeUtils.unicodeToString(matcher.group());
             if (adStr.contains(adTitle.trim())) {
                 adList.add(matcher.group().replaceAll("(?<!:)\\/\\/.*|\\/\\*(\\s|.)*?\\*\\/", ""));
                 System.out.println(String.format("----------广告连接为:%s", matcher.group().replaceAll("(?<!:)\\/\\/.*|\\/\\*(\\s|.)*?\\*\\/", "")));
@@ -138,7 +225,7 @@ public class TiebaCheck {
         }
     }
 
-    public static boolean verifyAd(String verifyUrl, boolean isTrack) throws ParseException, IOException {
+    public static boolean verifyAd(String adUrl,WebClient webClient,String verifyUrl, boolean isTrack) throws ParseException, IOException {
         Map<String, String> additionalHeaders = Maps.newHashMap();
         additionalHeaders.put("Accept", "image/webp,*/*;q=0.8");
         additionalHeaders.put("Accept-Encoding", "gzip, deflate, sdch");
@@ -152,14 +239,14 @@ public class TiebaCheck {
         }
         additionalHeaders.put("Referer", adUrl);
         additionalHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
-        WebRequest webRequest = buildWebRequest(verifyUrl,additionalHeaders);
+        WebRequest webRequest = buildWebRequest(verifyUrl, additionalHeaders);
         printAdditionalHeaders(webRequest);
         Page page = webClient.getPage(webRequest);
         printResponseHeaders(page.getWebResponse());
         return true;
     }
 
-    public static boolean checkAd(String adData,String checkRegex) throws ParseException, IOException {
+    public static boolean checkAd(String adUrl,WebClient webClient,String adData, String checkRegex) throws ParseException, IOException {
         ObjectMapper mapper = JsonUtils.getMapperInstance();
         JsonNode jsonNode = mapper.readTree(adData);
         String url = JsonPath.read("$.adData.url", jsonNode, String.class);
@@ -169,18 +256,18 @@ public class TiebaCheck {
         additionalHeaders.put("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6");
         additionalHeaders.put("Connection", "keep-alive");
         additionalHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
-        additionalHeaders.put("Referer",adUrl);
-        WebRequest webRequest = buildWebRequest(url,additionalHeaders);
-        HtmlPage page  = webClient.getPage(webRequest);
+        additionalHeaders.put("Referer", adUrl);
+        WebRequest webRequest = buildWebRequest(url, additionalHeaders);
+        HtmlPage page = webClient.getPage(webRequest);
 
         return page.asXml().contains(checkRegex);
     }
 
     public static String getVerifyUrl(String adData, boolean isTrack) throws Exception {
         StringBuilder url = new StringBuilder();
-        if(isTrack){
+        if (isTrack) {
             url.append("http://static.tieba.baidu.com/tb/img/track.gif?");
-        }else {
+        } else {
             url.append("http://tieba.baidu.com/billboard/pushlog/?");
         }
         ObjectMapper mapper = JsonUtils.getMapperInstance();

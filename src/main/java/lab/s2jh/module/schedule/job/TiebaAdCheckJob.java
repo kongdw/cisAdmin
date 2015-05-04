@@ -28,13 +28,12 @@ public class TiebaAdCheckJob extends BaseQuartzJobBean {
     @Override
     protected String executeInternalBiz(JobExecutionContext context) {
         JobBeanCfgService jobBeanCfgService = getSpringBean(JobBeanCfgService.class);
-        CrawlService crawlService = getSpringBean(CrawlService.class);
         AdvertisingService advertisingService = getSpringBean(AdvertisingService.class);
         JobBeanCfg jobBeanCfg = jobBeanCfgService.findByJobClass(context.getJobDetail().getJobClass().getName());
         logger.debug("execute job :{}", jobBeanCfg.getJobClass());
         List<Advertising> advertisings = advertisingService.findByEnabledAndDateBetweenFromDateToDate(true, new Date());
         for (Advertising ad : advertisings) {
-            crawlService.injectUrls(ad.getAdUrl()).startCrawlSync();
+
             int checkedNum = ad.getCheckedNum();
             ad.setCheckedNum(checkedNum + 1);
             advertisingService.save(ad);
