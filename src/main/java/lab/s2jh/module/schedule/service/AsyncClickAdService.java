@@ -48,7 +48,7 @@ public class AsyncClickAdService {
     public Future<String> startClickAdAsync(ProxyInfo proxyInfo, Advertising advertising) {
         String result="";
         try {
-            WebClient webClient = buildWebClient();
+            WebClient webClient = buildWebClient(proxyInfo);
             WebRequest request = buildWebRequest(advertising.getAdUrl());
             request.setHttpMethod(HttpMethod.GET);
             request.setAdditionalHeaders(getAdditionalHeaders(advertising.getAdUrl()));
@@ -137,7 +137,7 @@ public class AsyncClickAdService {
     public static WebClient buildWebClient(ProxyConfig proxyConfig) {
         WebClient webClient = new WebClient(BrowserVersion.FIREFOX_17);
         webClient.getOptions().setJavaScriptEnabled(false);
-        webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+//        webClient.setAjaxController(new NicelyResynchronizingAjaxController());
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.setJavaScriptErrorListener(new ExtJavaScriptErrorListener());
         webClient.getOptions().setCssEnabled(false);

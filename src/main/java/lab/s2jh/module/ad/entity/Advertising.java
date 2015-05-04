@@ -48,6 +48,11 @@ public class Advertising extends BaseNativeEntity implements Comparable<Advertis
     @Column(nullable = false)
     private Integer checkNum;
 
+
+    @MetaData(value = "验证字符串",tooltips = "广告验证字符串信息")
+    @Column(nullable = false)
+    private String checkedStr;
+
     @MetaData(value = "已完成次数")
     private Integer checkedNum=0;
 
@@ -65,7 +70,7 @@ public class Advertising extends BaseNativeEntity implements Comparable<Advertis
 
     @MetaData(value = "启用停用")
     @Column(nullable = false)
-    private boolean enable = Boolean.TRUE;
+    private Boolean enable = Boolean.FALSE;
 
     @Override
     public int compareTo(Advertising o) {

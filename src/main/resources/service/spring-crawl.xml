@@ -48,9 +48,18 @@
             </list>
         </property>
     </bean>
-
+    <!--
+        代理校验服务
+    -->
     <bean id="checkProxyService" class="lab.s2jh.module.schedule.service.ProxyCheckService">
         <property name="asyncProxyCheckService" ref="asyncProxyCheckService"/>
         <property name="checkTaskExecutor" ref="checkTaskExecutor"/>
+    </bean>
+    <!--
+        广告点击服务
+    -->
+    <bean id="clickAdService" class="lab.s2jh.module.schedule.service.ClickAdService">
+        <property name="clickTaskExecutor" ref="clickTaskExecutor"/>
+        <property name="asyncClickAdService" ref="asyncClickAdService"/>
     </bean>
 </beans>

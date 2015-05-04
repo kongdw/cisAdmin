@@ -41,7 +41,7 @@
                 colModel : [ {
                     label : '广告ID',
                     name : 'adId',
-                    width : 50,
+                    width : 30,
                     editable : false,
                     align : 'left'
                 }, {
@@ -69,18 +69,24 @@
                     name : 'enable',
                     formatter : 'checkbox',
                     editable : true,
-                    width : 40
+                    width : 30
                 }, {
                     label : '目标次数',
                     name : 'checkNum',
                     editable : true,
-                    width : 40
+                    width : 30
                 }, {
                     label : '已完成次数',
                     name : 'checkedNum',
                     editable : false,
-                    width : 40
+                    width : 30
                 }, {
+                    label : '验证字符串',
+                    name : 'checkedStr',
+                    editable : false,
+                    width : 50
+                },
+                 {
                     label : '开始时间',
                     name : 'fromDate',
                     formatter : 'timestamp',
