@@ -1,10 +1,17 @@
 package lab.s2jh.module.ad.web;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.nebhale.jsonpath.JsonPath;
 import lab.s2jh.core.annotation.MenuData;
 import lab.s2jh.core.service.BaseService;
 import lab.s2jh.core.service.Validation;
+import lab.s2jh.core.util.JsonUtils;
+import lab.s2jh.core.util.UnicodeUtils;
 import lab.s2jh.core.web.BaseController;
 import lab.s2jh.core.web.view.OperationResult;
+import lab.s2jh.crawl.service.HtmlunitService;
 import lab.s2jh.module.ad.entity.Advertising;
 import lab.s2jh.module.ad.service.AdvertisingService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,6 +23,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping(value = "/admin/ad/advertising")
@@ -71,4 +85,29 @@ public class AdvertisingController extends BaseController<Advertising, Long> {
     public void prepareModel(Model model, @RequestParam(value = "id", required = false) Long id) {
         super.initPrepareModel(model, id);
     }
+    @RequestMapping(value = "/adList",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Advertising> getAdList(String tieBaName) throws IOException {
+        String baseUrl = "http://tieba.baidu.com/f?ie=utf-8&kw=";
+        baseUrl += URLEncoder.encode(tieBaName, "UTF-8");
+        HtmlPage htmlPage = HtmlunitService.fetchHtmlPage(baseUrl,null,null,null,false);
+        List<String> adList = new ArrayList<String>();
+        String html = htmlPage.asXml();
+        Pattern pattern = Pattern.compile("\\{.*adData.*\\}");
+        Matcher matcher = pattern.matcher(html);
+        ObjectMapper mapper = JsonUtils.getMapperInstance();
+        List<Advertising> advertisings = new ArrayList<Advertising>();
+        while (matcher.find()) {
+            String adStr = UnicodeUtils.unicodeToString(matcher.group().replaceAll("(?<!:)\\/\\/.*|\\/\\*(\\s|.)*?\\*\\/", ""));
+            JsonNode jsonNode = mapper.readTree(adStr);
+            Advertising advertising = new Advertising();
+            advertising.setAdId(JsonPath.read("$.adData.id", jsonNode, String.class));
+            advertising.setAdUrl(baseUrl);
+            advertising.setTitle(JsonPath.read("$.adData.goods_info[0].thread_title", jsonNode, String.class));
+            advertising.setBaName(JsonPath.read("$.adData.pb_log.forum_name", jsonNode, String.class));
+            advertisings.add(advertising);
+        }
+        return advertisings;
+    }
+
 }

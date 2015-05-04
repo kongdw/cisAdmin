@@ -10,7 +10,6 @@ import com.google.common.collect.Maps;
 import com.nebhale.jsonpath.JsonPath;
 import lab.s2jh.core.test.Unicode;
 import lab.s2jh.core.util.JsonUtils;
-import lab.s2jh.crawl.htmlunit.ExtJavaScriptErrorListener;
 import org.apache.commons.codec.net.URLCodec;
 import org.json.simple.parser.ParseException;
 
@@ -55,8 +54,7 @@ public class TiebaCheck {
         webClient.getOptions().setJavaScriptEnabled(false);
         webClient.setAjaxController(new NicelyResynchronizingAjaxController());
         webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.setJavaScriptErrorListener(new ExtJavaScriptErrorListener());
-        webClient.getOptions().setCssEnabled(false);
+         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
         webClient.getOptions().setTimeout(10000);
         webClient.getCookieManager().setCookiesEnabled(true);

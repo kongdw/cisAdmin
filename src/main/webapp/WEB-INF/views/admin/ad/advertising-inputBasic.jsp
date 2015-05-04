@@ -20,15 +20,27 @@
     <%--</button>--%>
     <%--<button class="btn default" type="button" data-dismiss="modal">取消</button>--%>
     <%--</div>--%>
-<script type="javascript">
-    $(document).ready(function(){
-       $('#searchBtn').on('click',function(){
-           $.ajax({
-               type:'GET',
-               contentType:'application/json',
-               url:${ctx}+''
-           })
-       });
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $('#searchBtn').on('click', function () {
+            var baName = $('#baName').val();
+            if (baName == undefined || $.trim(baName) == "") {
+                alert("贴吧名称不能为空.");
+                return;
+            }
+
+            $("#admin-ad-list").ajaxJsonUrl(WEB_ROOT + "/admin/ad/advertising/adList?tieBaName=" + baName, function (data) {
+                var $list = $(this);
+                var index = 0;
+                $.each(data, function (i, item) {
+                    var el = '<label class="control-label">' + item.title + "</label>";
+                    var checkbox = '<input type="checkbox" name="' + item.adId + '" value="' + item.adId + '">';
+                    var row = '<div class="controls">' + checkbox + '</div>';
+                    var item = $(el + row).appendTo($list);
+                });
+            });
+            Util.assertNotBlank(baName, "调用的url参数不能为空");
+        });
     });
 </script>
 <div class="form-body">
@@ -39,9 +51,30 @@
 
                 <div class="input-group m-bot15">
                       <span class="input-group-btn">
-                        <button id="searchBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        <button id="searchBtn" onclick="" type="button" class="btn btn-default"><i
+                                class="fa fa-search"></i></button>
                       </span>
                     <form:input path="baName" class="form-control"/>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">选择广告</label>
+
+                <div id="admin-ad-list" class="controls">
+                    <input type="radio">
+                    <span><label>为游戏而生！GTX970M战神Z7彩色版7499元“好色”首发！</label>
+                    </span>
+                    <span>
+                        <input type="radio">
+                    <label> 颜值当道，谁是你心中的女神？</label>
+
+                    </span>
+                     <span>
+                         <input type="radio">
+                    <label>全民欢乐抽奖，大奖豪礼送不停</label>
+
+                    </span>
                 </div>
             </div>
             <div class="form-group">
