@@ -7,18 +7,15 @@ import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 
 /**
- * 代理服务器抓取作业
+ * 抓取代理作业
  */
-@MetaData("代理服务器抓取作业")
+@MetaData("抓取代理作业")
 @DisallowConcurrentExecution
-public class ProxyCrawlJob extends BaseQuartzJobBean {
-
+public class CrawlProxyJob extends BaseQuartzJobBean {
     @Override
     protected String executeInternalBiz(JobExecutionContext context) {
         CrawlService crawlService = getSpringBean(CrawlService.class);
-        crawlService.injectUrls("http://www.proxylists.net/cn_0_ext.html").startCrawlSync();
-        return "代理服务器抓取完成!";
+        crawlService.injectUrls("http://www.proxylists.net/cn_0_ext.html");
+        return "异步抓取代理作业提交完毕！";
     }
-
-
 }

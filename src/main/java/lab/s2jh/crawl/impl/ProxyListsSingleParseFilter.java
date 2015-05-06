@@ -45,7 +45,14 @@ public class ProxyListsSingleParseFilter extends AbstractParseFilter {
             ProxyInfo temp = proxyInfoService.findByIpAndPort(proxyInfo.getIp(), proxyInfo.getPort());
             if (temp == null)
                 proxyInfoService.save(proxyInfo);
-            logger.debug("Ip Info: {}", proxyStr);
+        }
+        Pattern singleUrlPattern = Pattern.compile("cn_0_ext.html");
+        if (singleUrlPattern.matcher(url).find()) { // 单页
+            pattern = Pattern.compile("cn_(([1-9]+)[0-9]{0,3})_ext.html");
+            matcher = pattern.matcher(ipTable.asXml());
+            while (matcher.find()) {
+                crawlService.injectUrls("http://www.proxylists.net/" + matcher.group());
+            }
         }
     }
 }

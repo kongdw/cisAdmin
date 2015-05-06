@@ -45,10 +45,11 @@ public class AsyncClickAdService {
     public Future<String> startClickAdAsync(ProxyInfo proxyInfo, Advertising advertising) {
         String result="";
         try {
+            String adUrl = encodeUrl(advertising.getAdUrl(),"UTF-8");
             WebClient webClient = buildWebClient(proxyInfo);
-            WebRequest request = buildWebRequest(advertising.getAdUrl());
+            WebRequest request = buildWebRequest(adUrl);
             request.setHttpMethod(HttpMethod.GET);
-            request.setAdditionalHeaders(getAdditionalHeaders(advertising.getAdUrl()));
+            request.setAdditionalHeaders(getAdditionalHeaders(adUrl));
             printAdditionalHeaders(request);
             HtmlPage page = webClient.getPage(request);
             printAdditionalHeaders(request);
@@ -56,12 +57,13 @@ public class AsyncClickAdService {
             printCookies(webClient);
             List<String> adList = getAdJsonList(page, advertising.getAdId());
             for (String adstr : adList) {
-                verifyAd(advertising.getAdUrl(),webClient,getVerifyUrl(adstr, true),true);
-                verifyAd(advertising.getAdUrl(),webClient,getVerifyUrl(adstr, false),false);
-                result = "广告点击: "+checkAd(advertising.getAdUrl(),webClient,adstr,"神舟");
+                verifyAd(adUrl,webClient,getVerifyUrl(adstr, true),true);
+                verifyAd(adUrl, webClient, getVerifyUrl(adstr, false), false);
+                result = "广告点击: "+checkAd(adUrl,webClient,adstr,advertising.getCheckedStr());
+                logger.info("result:{}",result);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           result="广告点击失败:"+e.getMessage();
         }
         return new AsyncResult<String>(result);
     }
@@ -83,7 +85,7 @@ public class AsyncClickAdService {
                 break;
         }
 
-        WebClient webClient = new WebClient(BrowserVersion.FIREFOX_17);
+        WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_10);
         webClient.getOptions().setJavaScriptEnabled(false);
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setProxyConfig(proxyConfig);
@@ -132,13 +134,12 @@ public class AsyncClickAdService {
     }
 
     public static WebClient buildWebClient(ProxyConfig proxyConfig) {
-        WebClient webClient = new WebClient(BrowserVersion.FIREFOX_17);
+        WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_10);
         webClient.getOptions().setJavaScriptEnabled(false);
-//        webClient.setAjaxController(new NicelyResynchronizingAjaxController());
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-        webClient.getOptions().setTimeout(10000);
+        webClient.getOptions().setTimeout(60000);
         webClient.getCookieManager().setCookiesEnabled(true);
         webClient.waitForBackgroundJavaScript(60 * 1000);
         if (proxyConfig != null) {
@@ -171,7 +172,7 @@ public class AsyncClickAdService {
         additionalHeaders.put("Connection", "keep-alive");
         additionalHeaders.put("Host", "tieba.baidu.com");
         additionalHeaders.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-        additionalHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
+        additionalHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
         additionalHeaders.put("Accept-Encoding", "gzip, deflate, sdch");
         additionalHeaders.put("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6");
         if (refUrl != null && refUrl.length() > 0)
@@ -234,7 +235,7 @@ public class AsyncClickAdService {
             additionalHeaders.put("Host", "tieba.baidu.com");
         }
         additionalHeaders.put("Referer", adUrl);
-        additionalHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
+        additionalHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
         WebRequest webRequest = buildWebRequest(verifyUrl, additionalHeaders);
         printAdditionalHeaders(webRequest);
         Page page = webClient.getPage(webRequest);
@@ -251,11 +252,11 @@ public class AsyncClickAdService {
         additionalHeaders.put("Accept-Encoding", "gzip, deflate, sdch");
         additionalHeaders.put("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6");
         additionalHeaders.put("Connection", "keep-alive");
-        additionalHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36");
+        additionalHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
         additionalHeaders.put("Referer", adUrl);
         WebRequest webRequest = buildWebRequest(url, additionalHeaders);
         HtmlPage page = webClient.getPage(webRequest);
-
+        logger.debug("htmlPage:{}",page.asText());
         return page.asXml().contains(checkRegex);
     }
 

@@ -4,7 +4,7 @@ import lab.s2jh.core.annotation.MetaData;
 import lab.s2jh.module.ad.entity.ProxyInfo;
 import lab.s2jh.module.ad.service.ProxyInfoService;
 import lab.s2jh.module.schedule.BaseQuartzJobBean;
-import lab.s2jh.module.schedule.service.ProxyCheckService;
+import lab.s2jh.module.schedule.service.CheckProxyService;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
@@ -16,7 +16,6 @@ import java.util.List;
  * 校验代理作业
  */
 @MetaData("校验代理作业")
-@DisallowConcurrentExecution
 public class CheckProxyJob extends BaseQuartzJobBean {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckProxyJob.class);
@@ -24,9 +23,9 @@ public class CheckProxyJob extends BaseQuartzJobBean {
     @Override
     protected String executeInternalBiz(JobExecutionContext context) {
         ProxyInfoService proxyInfoService = getSpringBean(ProxyInfoService.class);
-        ProxyCheckService checkService = getSpringBean(ProxyCheckService.class);
+        CheckProxyService checkService = getSpringBean(CheckProxyService.class);
         List<ProxyInfo> proxyInfoList = proxyInfoService.findAllCached();
-        checkService.injectProxyInfo(proxyInfoList.toArray(new ProxyInfo[proxyInfoList.size()])).startCheckSync();
-        return "代理校验作业执行结束!";
+        checkService.injectProxyInfo(proxyInfoList.toArray(new ProxyInfo[proxyInfoList.size()]));
+        return "异步校验代理作业提交完毕！";
     }
 }

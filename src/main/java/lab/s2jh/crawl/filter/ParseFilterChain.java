@@ -18,7 +18,7 @@ public class ParseFilterChain implements ParseFilter {
     public final static String KEY_LOGIN_COOKIES = "KEY_LOGIN_COOKIES";
 
     /**
-     * 过滤列表
+     * 过滤器列表
      */
     private List<ParseFilter> filters;
 
@@ -27,7 +27,7 @@ public class ParseFilterChain implements ParseFilter {
     private int i = 0;
 
     public ParseFilterChain() {
-        filters = new ArrayList<ParseFilter>();
+        this.filters = new ArrayList<ParseFilter>();
     }
 
     public ParseFilterChain(List<ParseFilter> filters, boolean async) {
@@ -54,7 +54,11 @@ public class ParseFilterChain implements ParseFilter {
     public String getImgRootDir() {
         return (String) params.get(KEY_IMG_ROOT_DIR);
     }
-    
+
+    /**
+     * 登录Cookies
+     * @return
+     */
     public Set<Cookie> getLoginCookies() {
         return (Set<Cookie>) params.get(KEY_LOGIN_COOKIES);
     }

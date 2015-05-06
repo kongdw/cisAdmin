@@ -14,6 +14,7 @@
            data-editrulesurl="${ctx}/admin/util/validate?clazz=${clazz}">
 <form:hidden path="id"/>
 <form:hidden path="version"/>
+
     <%--<div class="form-actions">--%>
     <%--<button class="btn green" type="submit" data-grid-reload="#grid-ad-advertising-index" data-post-dismiss="modal">--%>
     <%--保存--%>
@@ -21,6 +22,7 @@
     <%--<button class="btn default" type="button" data-dismiss="modal">取消</button>--%>
     <%--</div>--%>
 <script type="text/javascript">
+    var adJsonList;
     jQuery(document).ready(function () {
         $('#searchBtn').on('click', function () {
             var baName = $('#baName').val();
@@ -28,20 +30,26 @@
                 alert("贴吧名称不能为空.");
                 return;
             }
-
             $("#admin-ad-list").ajaxJsonUrl(WEB_ROOT + "/admin/ad/advertising/adList?tieBaName=" + baName, function (data) {
+                adJsonList = data;
                 var $list = $(this);
-                var index = 0;
+                $list.html('');
                 $.each(data, function (i, item) {
-                    var el = '<label class="control-label">' + item.title + "</label>";
-                    var checkbox = '<input type="checkbox" name="' + item.adId + '" value="' + item.adId + '">';
-                    var row = '<div class="controls">' + checkbox + '</div>';
-                    var item = $(el + row).appendTo($list);
+                    var radio = '<input type="radio" name="adId" value="' + item.adId + '">';
+                    var label = '<label>' + radio + item.title + '</label>';
+                    var div = ' <div class="radio">' + label + '</div>';
+                    $(div).appendTo($list);
+                });
+                /** 加载完成后注册change事件 */
+                $('input[type="radio"][name="adId"]').on('change',function(){
+                    var adTitle = $(this).parent().text();
+                    $('#title').attr('value',adTitle);
+                    $('#adUrl').attr('value','http://tieba.baidu.com/f?ie=utf-8&kw='+$('#baName').val());
                 });
             });
-            Util.assertNotBlank(baName, "调用的url参数不能为空");
         });
     });
+
 </script>
 <div class="form-body">
     <div class="row">
@@ -51,8 +59,8 @@
 
                 <div class="input-group m-bot15">
                       <span class="input-group-btn">
-                        <button id="searchBtn" onclick="" type="button" class="btn btn-default"><i
-                                class="fa fa-search"></i></button>
+                        <button id="searchBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i>
+                        </button>
                       </span>
                     <form:input path="baName" class="form-control"/>
                 </div>
@@ -60,44 +68,10 @@
             </div>
             <div class="form-group">
                 <label class="control-label">选择广告</label>
-
-                <div id="admin-ad-list" class="controls">
-                    <input type="radio">
-                    <span><label>为游戏而生！GTX970M战神Z7彩色版7499元“好色”首发！</label>
-                    </span>
-                    <span>
-                        <input type="radio">
-                    <label> 颜值当道，谁是你心中的女神？</label>
-
-                    </span>
-                     <span>
-                         <input type="radio">
-                    <label>全民欢乐抽奖，大奖豪礼送不停</label>
-
-                    </span>
-                </div>
+                <div id="admin-ad-list" class="controls"></div>
             </div>
-            <div class="form-group">
-                <label class="control-label">广告ID</label>
-
-                <div class="controls">
-                    <form:input path="adId" class="form-control" readonly="true"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label">广告标题</label>
-
-                <div class="controls">
-                    <form:input path="title" class="form-control" readonly="true"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label">吧URL</label>
-
-                <div class="controls">
-                    <form:input path="adUrl" class="form-control" readonly="true"/>
-                </div>
-            </div>
+             <form:hidden path="title"/>
+             <form:hidden path="adUrl"/>
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">开始时间</label>

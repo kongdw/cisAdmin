@@ -90,8 +90,7 @@ public class AdvertisingController extends BaseController<Advertising, Long> {
     public List<Advertising> getAdList(String tieBaName) throws IOException {
         String baseUrl = "http://tieba.baidu.com/f?ie=utf-8&kw=";
         baseUrl += URLEncoder.encode(tieBaName, "UTF-8");
-        HtmlPage htmlPage = HtmlunitService.fetchHtmlPage(baseUrl,null,null,null,false);
-        List<String> adList = new ArrayList<String>();
+        HtmlPage htmlPage = HtmlunitService.fetchHtmlPage(baseUrl, null, null);
         String html = htmlPage.asXml();
         Pattern pattern = Pattern.compile("\\{.*adData.*\\}");
         Matcher matcher = pattern.matcher(html);
@@ -106,6 +105,7 @@ public class AdvertisingController extends BaseController<Advertising, Long> {
             advertising.setTitle(JsonPath.read("$.adData.goods_info[0].thread_title", jsonNode, String.class));
             advertising.setBaName(JsonPath.read("$.adData.pb_log.forum_name", jsonNode, String.class));
             advertisings.add(advertising);
+            advertising.setAdUrl(baseUrl);
         }
         return advertisings;
     }

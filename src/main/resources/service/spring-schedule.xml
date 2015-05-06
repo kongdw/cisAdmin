@@ -88,5 +88,7 @@
 		<property name="jobBeanCfgService" ref="jobBeanCfgService" />
 		<property name="runWithinCluster" value="true" />
 	</bean>
-
+    <bean id="proxyQueue" class="java.util.concurrent.LinkedBlockingQueue">
+        <constructor-arg value="9999"/>
+    </bean>
 </beans>

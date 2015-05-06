@@ -5,32 +5,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-public class ProxyCheckService {
+public class CheckProxyService {
 
-    private final Logger logger = LoggerFactory.getLogger(ProxyCheckService.class);
+    private final Logger logger = LoggerFactory.getLogger(CheckProxyService.class);
 
     private boolean stopInjectFlag = false;
 
     private ThreadPoolTaskExecutor checkTaskExecutor;
 
-    private AsyncProxyCheckService asyncProxyCheckService;
+    private AsyncCheckProxyService asyncProxyCheckService;
 
 
     public void setCheckTaskExecutor(ThreadPoolTaskExecutor checkTaskExecutor) {
         this.checkTaskExecutor = checkTaskExecutor;
     }
 
-    public void setAsyncProxyCheckService(AsyncProxyCheckService asyncProxyCheckService) {
+    public void setAsyncProxyCheckService(AsyncCheckProxyService asyncProxyCheckService) {
         this.asyncProxyCheckService = asyncProxyCheckService;
     }
 
-    public ProxyCheckService injectProxyInfo(ProxyInfo... proxyinfos) {
+    public CheckProxyService injectProxyInfo(ProxyInfo... proxyInfoList) {
         if(stopInjectFlag){
             logger.debug("Proxy inject rejected as user request.");
-            return this;
         }
-        for (ProxyInfo proxyInfo : proxyinfos) {
-            logger.info("Injected : {}", proxyInfo);
+        for (ProxyInfo proxyInfo : proxyInfoList) {
             logger.info("CheckTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
                     checkTaskExecutor.getActiveCount(), checkTaskExecutor.getPoolSize(),
                     checkTaskExecutor.getMaxPoolSize());

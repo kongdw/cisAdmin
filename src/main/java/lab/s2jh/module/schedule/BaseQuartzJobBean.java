@@ -39,6 +39,10 @@ public abstract class BaseQuartzJobBean extends QuartzJobBean {
         return this.applicationContext.getBean(clazz);
     }
 
+    protected Object getSpringBean(String name){
+        return this.applicationContext.getBean(name);
+    }
+
     protected JdbcTemplate getJdbcTemplate() {
         return getSpringBean(JdbcTemplate.class);
     }

@@ -35,9 +35,9 @@
 			<property name="password" value="${jdbc_password}" />
 
             <!-- 配置初始化大小、最小、最大 -->
-			<property name="initialSize" value="1" />
+			<property name="initialSize" value="10" />
 			<property name="minIdle" value="1" />
-			<property name="maxActive" value="20" />
+			<property name="maxActive" value="30" />
 
             <!-- 配置获取连接等待超时的时间 -->
 			<property name="maxWait" value="60000" />

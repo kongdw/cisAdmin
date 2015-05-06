@@ -31,7 +31,7 @@ public class ClickAdService {
             return this;
         }
             logger.info("Injected proxy: {} advertising: {}", proxyInfo,advertising);
-            logger.info("CheckTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
+            logger.info("clickTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
                     clickTaskExecutor.getActiveCount(), clickTaskExecutor.getPoolSize(),
                     clickTaskExecutor.getMaxPoolSize());
             asyncClickAdService.startClickAdAsync(proxyInfo,advertising);
@@ -49,7 +49,7 @@ public class ClickAdService {
             while (tobeWait) {
                 Thread.sleep(10000);
                 logger.info("Main sync thread [{}] is waiting to complete...", Thread.currentThread().getId());
-                logger.info("CheckTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
+                logger.info("clickTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
                         clickTaskExecutor.getActiveCount(), clickTaskExecutor.getPoolSize(),
                         clickTaskExecutor.getMaxPoolSize());
                 if (clickTaskExecutor.getPoolSize() > 0 && clickTaskExecutor.getActiveCount() == 0) {
