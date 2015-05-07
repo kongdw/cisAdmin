@@ -31,10 +31,14 @@ public class ProxyInfoService extends BaseService<ProxyInfo, Long> {
     }
 
     @Transactional(readOnly = true)
-    public ProxyInfo findByIpAndPort(String ip,Integer port){
-        return proxyInfoDao.findByIpAndPort(ip,port);
+    public ProxyInfo findByIpAndPort(String ip, Integer port) {
+        return proxyInfoDao.findByIpAndPort(ip, port);
 
     }
 
+    @Transactional(readOnly = true)
+    public List<ProxyInfo> findByCheckFlagAndCheckTime(Integer checkFlag, Date checkTime) {
+        return proxyInfoDao.findByCheckFlagAndCheckTime(checkFlag, checkTime);
+    }
 
 }

@@ -47,6 +47,7 @@ public class HtmlunitService {
                 webClient.getOptions().setCssEnabled(false);
                 webClient.getOptions().setAppletEnabled(false);
                 webClient.getOptions().setThrowExceptionOnScriptError(false);
+                webClient.getOptions().setJavaScriptEnabled(true);
                 // AJAX support
                 webClient.setAjaxController(new NicelyResynchronizingAjaxController());
                 webClient.getOptions().setRedirectEnabled(true);
@@ -83,17 +84,13 @@ public class HtmlunitService {
         return fetchHtmlPage(url, null, additionalHeaders);
     }
 
-    public static HtmlPage fetchHtmlPage(String url, Set<Cookie> cookies, Map<String, String> additionalHeaders) {
-        return fetchHtmlPage(url,cookies,additionalHeaders,null,true);
-    }
-
     /**
      * 基于指定URL及特定请求头信息抓取页面，如设置了cookie登录信息、reference、host等特定服务器需要的头信息
      * @param url
      * @param additionalHeaders
      * @return
      */
-    public static HtmlPage fetchHtmlPage(String url, Set<Cookie> cookies, Map<String, String> additionalHeaders,ProxyConfig proxyConfig,boolean enableJavaScript) {
+    public static HtmlPage fetchHtmlPage(String url, Set<Cookie> cookies, Map<String, String> additionalHeaders) {
         try {
             totalFetchedCount++;
 
@@ -111,14 +108,9 @@ public class HtmlunitService {
                     webClient.getCookieManager().addCookie(cookie);
                 }
             }
-            if(proxyConfig != null){
-                webClient.getOptions().setProxyConfig(proxyConfig);
-            }
-            webClient.getOptions().setJavaScriptEnabled(enableJavaScript);
             HtmlPage page = webClient.getPage(webRequest);
             long end = new Date().getTime();
             totalFetchTimes += (end - start);
-
             printLog();
             return page;
         } catch (Exception e) {

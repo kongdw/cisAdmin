@@ -4,6 +4,7 @@ import lab.s2jh.core.annotation.MetaData;
 import lab.s2jh.module.ad.entity.Advertising;
 import lab.s2jh.module.ad.entity.ProxyInfo;
 import lab.s2jh.module.ad.service.AdvertisingService;
+import lab.s2jh.module.ad.service.ProxyInfoService;
 import lab.s2jh.module.schedule.BaseQuartzJobBean;
 import lab.s2jh.module.schedule.entity.JobBeanCfg;
 import lab.s2jh.module.schedule.service.ClickAdService;
@@ -13,6 +14,7 @@ import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -29,23 +31,31 @@ public class ClickTiebaAdJob extends BaseQuartzJobBean {
     @Override
     protected String executeInternalBiz(JobExecutionContext context) {
         JobBeanCfgService jobBeanCfgService = getSpringBean(JobBeanCfgService.class);
-        AdvertisingService advertisingService = getSpringBean(AdvertisingService.class);
-        ClickAdService clickAdService = getSpringBean(ClickAdService.class);
-        Object obj = getSpringBean("proxyQueue");
-        LinkedBlockingQueue<ProxyInfo> proxyInfos = null;
-        if (obj instanceof LinkedBlockingQueue) {
-            proxyInfos = (LinkedBlockingQueue<ProxyInfo>) obj;
-        }else {
-            logger.error("无法获取到代理队列[proxyQueue]，请检查spring配置文件!");
-            return "无法获取到代理队列[proxyQueue]，请检查spring配置文件!";
-        }
         JobBeanCfg jobBeanCfg = jobBeanCfgService.findByJobClass(context.getJobDetail().getJobClass().getName());
         logger.debug("execute job :{}", jobBeanCfg.getJobClass());
-        List<Advertising> advertisings = advertisingService.findByEnabledAndDateBetweenFromDateToDate(true, new Date());
-        for (Advertising ad : advertisings) {
-            clickAdService.injectProxyInfo(proxyInfos.poll(), ad);
-            return "成功完成一次点击!";
+
+        AdvertisingService advertisingService = getSpringBean(AdvertisingService.class);
+        ClickAdService clickAdService = getSpringBean(ClickAdService.class);
+        ProxyInfoService proxyInfoService = getSpringBean(ProxyInfoService.class);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.add(Calendar.DATE, -1);
+
+        LinkedBlockingQueue<ProxyInfo> proxyQueue = (LinkedBlockingQueue<ProxyInfo>) getSpringBean("proxyQueue");
+        if (proxyQueue.size() <= 0) {
+            List<ProxyInfo> proxyInfoList = proxyInfoService.findByCheckFlagAndCheckTime(1, calendar.getTime());
+            for (ProxyInfo proxyInfo : proxyInfoList) {
+                proxyQueue.add(proxyInfo);
+            }
         }
-        return "未找到需要点击的广告!";
+
+        List<Advertising> advertisingList = advertisingService.findByEnabledAndDateBetweenFromDateToDate(true, new Date());
+        clickAdService.injectProxyInfo(proxyQueue.poll(), advertisingList.toArray(new Advertising[advertisingList.size()])).startClickAdSync();
+        return "异步广告点击作业已提交！";
     }
 }

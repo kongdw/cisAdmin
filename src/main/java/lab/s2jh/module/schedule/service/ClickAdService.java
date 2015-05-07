@@ -25,24 +25,26 @@ public class ClickAdService {
         this.asyncClickAdService = asyncClickAdService;
     }
 
-    public ClickAdService injectProxyInfo(ProxyInfo proxyInfo,Advertising advertising) {
-        if(stopInjectFlag){
+    public ClickAdService injectProxyInfo(ProxyInfo proxyInfo, Advertising... advertisings) {
+        if (stopInjectFlag) {
             logger.debug("Proxy inject rejected as user request.");
             return this;
         }
-            logger.info("Injected proxy: {} advertising: {}", proxyInfo,advertising);
-            logger.info("clickTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
-                    clickTaskExecutor.getActiveCount(), clickTaskExecutor.getPoolSize(),
-                    clickTaskExecutor.getMaxPoolSize());
-            asyncClickAdService.startClickAdAsync(proxyInfo,advertising);
+        logger.info("Injected proxy: {} advertising: {}", proxyInfo, advertisings);
+        logger.info("clickTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
+                clickTaskExecutor.getActiveCount(), clickTaskExecutor.getPoolSize(),
+                clickTaskExecutor.getMaxPoolSize());
+        for (Advertising advertising : advertisings) {
+            asyncClickAdService.startClickAdAsync(proxyInfo, advertising);
+        }
         return this;
     }
 
-    public void startClickAdAsync(){
+    public void startClickAdAsync() {
         stopInjectFlag = false;
     }
 
-    public void startClickAdSync(){
+    public void startClickAdSync() {
         stopInjectFlag = false;
         try {
             boolean tobeWait = true;
@@ -60,6 +62,7 @@ public class ClickAdService {
             throw new RuntimeException(e);
         }
     }
+
     public void stopInject() {
         logger.debug("Stop check proxy signal received.");
         stopInjectFlag = true;

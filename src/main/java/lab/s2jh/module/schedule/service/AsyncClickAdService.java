@@ -12,10 +12,12 @@ import lab.s2jh.core.util.JsonUtils;
 import lab.s2jh.core.util.UnicodeUtils;
 import lab.s2jh.module.ad.entity.Advertising;
 import lab.s2jh.module.ad.entity.ProxyInfo;
+import lab.s2jh.module.ad.service.AdvertisingService;
 import org.apache.commons.codec.net.URLCodec;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,8 @@ import java.util.regex.Pattern;
 public class AsyncClickAdService {
 
     private static final Logger logger = LoggerFactory.getLogger(AsyncClickAdService.class);
+    @Autowired
+    private AdvertisingService advertisingService;
 
     /**
      * 异步点击广告
@@ -45,23 +49,26 @@ public class AsyncClickAdService {
     public Future<String> startClickAdAsync(ProxyInfo proxyInfo, Advertising advertising) {
         String result="";
         try {
-            String adUrl = encodeUrl(advertising.getAdUrl(),"UTF-8");
-            WebClient webClient = buildWebClient(proxyInfo);
-            WebRequest request = buildWebRequest(adUrl);
-            request.setHttpMethod(HttpMethod.GET);
-            request.setAdditionalHeaders(getAdditionalHeaders(adUrl));
-            printAdditionalHeaders(request);
-            HtmlPage page = webClient.getPage(request);
-            printAdditionalHeaders(request);
-            printResponseHeaders(page.getWebResponse());
-            printCookies(webClient);
-            List<String> adList = getAdJsonList(page, advertising.getAdId());
-            for (String adstr : adList) {
-                verifyAd(adUrl,webClient,getVerifyUrl(adstr, true),true);
-                verifyAd(adUrl, webClient, getVerifyUrl(adstr, false), false);
-                result = "广告点击: "+checkAd(adUrl,webClient,adstr,advertising.getCheckedStr());
-                logger.info("result:{}",result);
-            }
+                String adUrl = encodeUrl(advertising.getAdUrl(), "UTF-8");
+                WebClient webClient = buildWebClient(proxyInfo);
+                WebRequest request = buildWebRequest(adUrl);
+                request.setHttpMethod(HttpMethod.GET);
+                request.setAdditionalHeaders(getAdditionalHeaders(adUrl));
+                //printAdditionalHeaders(request);
+                HtmlPage page = webClient.getPage(request);
+                //printAdditionalHeaders(request);
+                //printResponseHeaders(page.getWebResponse());
+                //printCookies(webClient);
+                List<String> adList = getAdJsonList(page, advertising.getAdId());
+                for (String adstr : adList) {
+                    verifyAd(adUrl, webClient, getVerifyUrl(adstr, true), true);
+                    verifyAd(adUrl, webClient, getVerifyUrl(adstr, false), false);
+                    if (checkAd(adUrl, webClient, adstr, advertising.getCheckedStr())) {
+                        advertising.setCheckedNum(advertising.getCheckedNum() + 1);
+                        advertisingService.save(advertising);
+                        logger.info("result:{}", "广告点击成功！");
+                    }
+                }
         } catch (Exception e) {
            result="广告点击失败:"+e.getMessage();
         }
@@ -237,9 +244,9 @@ public class AsyncClickAdService {
         additionalHeaders.put("Referer", adUrl);
         additionalHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
         WebRequest webRequest = buildWebRequest(verifyUrl, additionalHeaders);
-        printAdditionalHeaders(webRequest);
+        //printAdditionalHeaders(webRequest);
         Page page = webClient.getPage(webRequest);
-        printResponseHeaders(page.getWebResponse());
+        //printResponseHeaders(page.getWebResponse());
         return true;
     }
 
@@ -256,7 +263,10 @@ public class AsyncClickAdService {
         additionalHeaders.put("Referer", adUrl);
         WebRequest webRequest = buildWebRequest(url, additionalHeaders);
         HtmlPage page = webClient.getPage(webRequest);
-        logger.debug("htmlPage:{}",page.asText());
+//        if(page.getWebResponse().getStatusCode() == 302){
+//            return true;
+//        }
+        //logger.debug("htmlPage:{}",page.asText());
         return page.asXml().contains(checkRegex);
     }
 

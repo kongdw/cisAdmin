@@ -72,7 +72,7 @@
             </div>
              <form:hidden path="title"/>
              <form:hidden path="adUrl"/>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">开始时间</label>
 
@@ -81,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">结束时间</label>
 
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">目标次数</label>
 

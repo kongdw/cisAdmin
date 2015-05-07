@@ -78,7 +78,7 @@
                 }, {
                     label : '已完成次数',
                     name : 'checkedNum',
-                    editable : false,
+                    editable : true,
                     width : 30
                 }, {
                     label : '验证字符串',
