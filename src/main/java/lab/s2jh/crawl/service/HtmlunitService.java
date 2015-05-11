@@ -46,14 +46,14 @@ public class HtmlunitService {
                 webClient = new WebClient(BrowserVersion.CHROME);
                 webClient.getOptions().setCssEnabled(false);
                 webClient.getOptions().setAppletEnabled(false);
+                webClient.getOptions().setJavaScriptEnabled(false);
                 webClient.getOptions().setThrowExceptionOnScriptError(false);
-                webClient.getOptions().setJavaScriptEnabled(true);
                 // AJAX support
                 webClient.setAjaxController(new NicelyResynchronizingAjaxController());
                 webClient.getOptions().setRedirectEnabled(true);
                 webClient.getCookieManager().setCookiesEnabled(true);
                 // Use extension version htmlunit cache process
-                webClient.setCache(new ExtHtmlunitCache());
+                //webClient.setCache(new ExtHtmlunitCache());
                 // Enhanced WebConnection based on urlfilter
                 webClient.setWebConnection(new RegexHttpWebConnection(webClient, fetchUrlRules));
                 webClient.waitForBackgroundJavaScript(600 * 1000);
@@ -71,7 +71,7 @@ public class HtmlunitService {
      * @return
      */
     public static HtmlPage fetchHtmlPage(String url) {
-        return fetchHtmlPage(url, null, null);
+        return fetchHtmlPage(url, null, null,null,true);
     }
 
     /**
@@ -81,7 +81,12 @@ public class HtmlunitService {
      * @return
      */
     public static HtmlPage fetchHtmlPage(String url, Map<String, String> additionalHeaders) {
-        return fetchHtmlPage(url, null, additionalHeaders);
+        return fetchHtmlPage(url, null, additionalHeaders,null,true);
+    }
+
+
+    public static HtmlPage fetchHtmlPage(String url, Set<Cookie> cookies, Map<String, String> additionalHeaders){
+        return fetchHtmlPage(url,cookies,additionalHeaders,null,true);
     }
 
     /**
@@ -90,7 +95,7 @@ public class HtmlunitService {
      * @param additionalHeaders
      * @return
      */
-    public static HtmlPage fetchHtmlPage(String url, Set<Cookie> cookies, Map<String, String> additionalHeaders) {
+    public static HtmlPage fetchHtmlPage(String url, Set<Cookie> cookies, Map<String, String> additionalHeaders,ProxyConfig proxyConfig,boolean isEnableJavaScript) {
         try {
             totalFetchedCount++;
 
@@ -107,6 +112,13 @@ public class HtmlunitService {
                 for (Cookie cookie : cookies) {
                     webClient.getCookieManager().addCookie(cookie);
                 }
+            }
+            if(proxyConfig != null){
+                webClient.getOptions().setProxyConfig(proxyConfig);
+            }
+            webClient.getCache().clear();
+            if(isEnableJavaScript){
+                webClient.getOptions().setJavaScriptEnabled(true);
             }
             HtmlPage page = webClient.getPage(webRequest);
             long end = new Date().getTime();

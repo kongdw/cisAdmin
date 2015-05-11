@@ -32,17 +32,9 @@ public class AsyncCheckProxyService {
     private static final Logger logger = LoggerFactory.getLogger(AsyncCheckProxyService.class);
 
     public String checkUrl = "http://tieba.baidu.com";
-
-    public String checkedRegex = "0110516";
-
     public void setCheckUrl(String checkUrl) {
         this.checkUrl = checkUrl;
     }
-
-    public void setCheckedRegex(String checkedRegex) {
-        this.checkedRegex = checkedRegex;
-    }
-
     @Autowired
     private ProxyInfoService proxyInfoService;
 
@@ -54,29 +46,19 @@ public class AsyncCheckProxyService {
     public Future<String> startAsyncCheck(ProxyInfo proxyInfo) {
         String result = "";
         try {
-            WebRequest webRequest = new WebRequest(new URL(checkUrl));
-            WebClient webClient = new WebClient(BrowserVersion.CHROME);
-            webClient.getOptions().setProxyConfig(getProxyConfig(proxyInfo));
-            webClient.getOptions().setCssEnabled(false);
-            webClient.getOptions().setAppletEnabled(false);
-            webClient.getOptions().setJavaScriptEnabled(false);
-            webClient.getOptions().setThrowExceptionOnScriptError(false);
-            webClient.getOptions().setRedirectEnabled(true);
-            webClient.getCookieManager().setCookiesEnabled(true);
-            HtmlPage htmlPage = webClient.getPage(webRequest);
-            if (htmlPage != null) {
-                Pattern pattern = Pattern.compile(checkedRegex);
-                String pageXml = htmlPage.asXml();
-                Matcher matcher = pattern.matcher(pageXml);
-                if (matcher.find()) {
-                    proxyInfo.setCheckFlag(1);
-                    proxyQueue.add(proxyInfo);
-                    result = " is success !";
-                }
+            HtmlPage htmlPage =  HtmlunitService.fetchHtmlPage(checkUrl, null, null, getProxyConfig(proxyInfo), false);
+            if (htmlPage.getWebResponse().getStatusCode() == 200){
+                proxyInfo.setCheckFlag(1);
+                proxyQueue.add(proxyInfo);
+                result = "is success !";
+            }else {
+                proxyInfo.setCheckFlag(0);
+                result = "is invalid !";
             }
+
         } catch (Exception e) {
             proxyInfo.setCheckFlag(0);
-            result = e.getMessage();
+            result = e.getCause().getMessage();
         }
         proxyInfo.setCheckTime(new Date());
         proxyInfoService.save(proxyInfo);
@@ -84,7 +66,7 @@ public class AsyncCheckProxyService {
         return new AsyncResult<String>(result);
     }
 
-    public static ProxyConfig getProxyConfig(ProxyInfo proxyInfo) {
+    private static ProxyConfig getProxyConfig(ProxyInfo proxyInfo) {
         ProxyConfig proxyConfig = new ProxyConfig();
         proxyConfig.setProxyHost(proxyInfo.getIp());
         proxyConfig.setProxyPort(proxyInfo.getPort());

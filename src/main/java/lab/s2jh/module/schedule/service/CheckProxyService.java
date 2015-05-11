@@ -29,11 +29,11 @@ public class CheckProxyService {
             logger.debug("Proxy inject rejected as user request.");
         }
         for (ProxyInfo proxyInfo : proxyInfoList) {
-            logger.info("CheckTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
-                    checkTaskExecutor.getActiveCount(), checkTaskExecutor.getPoolSize(),
-                    checkTaskExecutor.getMaxPoolSize());
             asyncProxyCheckService.startAsyncCheck(proxyInfo);
         }
+        logger.info("CheckTaskExecutor ActiveCount/PoolSize/MaxPoolSize: {}/{}/{}",
+                checkTaskExecutor.getActiveCount(), checkTaskExecutor.getPoolSize(),
+                checkTaskExecutor.getMaxPoolSize());
         return this;
     }
 

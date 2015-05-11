@@ -53,7 +53,6 @@
         <property name="asyncProxyCheckService">
             <bean class="lab.s2jh.module.schedule.service.AsyncCheckProxyService">
                 <property name="checkUrl" value="http://tieba.baidu.com"/>
-                <property name="checkedRegex" value="0110516"/>
             </bean>
         </property>
         <property name="checkTaskExecutor" ref="checkTaskExecutor"/>
